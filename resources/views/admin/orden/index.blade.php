@@ -49,10 +49,11 @@
                                             </label>
                                         </th>
 
-                                        <th is='sortable' :column="'id'">{{ trans('admin.orden.columns.id') }}</th>
+
                                         <th is='sortable' :column="'nroOrden'">{{ trans('admin.orden.columns.nroOrden') }}</th>
                                         <th is='sortable' :column="'cliente_id'">{{ trans('admin.orden.columns.cliente_id') }}</th>
                                         <th is='sortable' :column="'detalles'">{{ trans('admin.orden.columns.detalles') }}</th>
+                                        <th is='sortable' :column="'estado'">Estado</th>
 
                                         <th></th>
                                     </tr>
@@ -76,10 +77,13 @@
                                             </label>
                                         </td>
 
-                                        <td>@{{ item.id }}</td>
+
                                         <td>@{{ item.nroOrden }}</td>
-                                        <td>@{{ item.cliente_id }}</td>
+                                        <td>@{{ item.cliente.razon_social}}</td>
                                         <td>@{{ item.detalles }}</td>
+                                        <td v-if="item.estado_orden.estado_id=='1'">No ha sido entregado</td>
+                                        <td v-else>Entregado</td>
+
 
                                         <td>
                                             <div class="row no-gutters">

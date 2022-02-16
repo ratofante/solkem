@@ -37,6 +37,10 @@ class Orden extends Model
     }
     public function cliente()
     {
-        $this->belongsTo('cliente');
+        return $this->belongsTo(Cliente::class);
+    }
+    public function estado_orden()
+    {
+        return $this->hasOne(EstadoOrden::class, 'orden_id');
     }
 }

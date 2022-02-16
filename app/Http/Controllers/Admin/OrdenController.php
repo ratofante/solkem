@@ -41,7 +41,18 @@ class OrdenController extends Controller
             ['id', 'nroOrden', 'cliente_id', 'detalles'],
 
             // set columns to searchIn
-            ['id', 'nroOrden', 'detalles']
+            ['id', 'nroOrden', 'detalles', 'cliente_id'],
+
+            function($query) {
+                $query->with(['cliente']);
+                $query->join('cliente', 'cliente.id', '=', 'orden.cliente_id');
+
+                $query->with(['estado_orden']);
+                $query->join('estado_orden', 'orden.id', '=', 'estado_orden.orden_id');
+                $query->join('estado', 'estado_orden.estado_id','=','estado.id');
+                //$query->where('estado_orden.estado_id', '=', 'estado.id');
+
+            }
         );
 
         if ($request->ajax()) {
@@ -52,7 +63,7 @@ class OrdenController extends Controller
             }
             return ['data' => $data];
         }
-
+        //var_dump($data);die;
         return view('admin.orden.index', ['data' => $data]);
     }
 

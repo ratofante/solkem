@@ -37,10 +37,15 @@ class ClienteController extends Controller
             $request,
 
             // set columns to query
-            ['id', 'cuit', 'razon_social', 'telefono', 'direccion', 'usuario_id'],
+            ['id', 'cuit', 'razon_social', 'telefono', 'direccion', 'usuario_id', 'admin_users.email'],
 
             // set columns to searchIn
-            ['id', 'cuit', 'razon_social', 'telefono', 'direccion']
+            ['id', 'cuit', 'razon_social', 'telefono', 'direccion', 'admin_users.email'],
+
+            function($query) {
+                $query->with(['admin_users']);
+                $query->join('admin_users', 'cliente.usuario_id', "=", 'admin_users.id');
+            }
         );
 
         if ($request->ajax()) {
@@ -51,7 +56,7 @@ class ClienteController extends Controller
             }
             return ['data' => $data];
         }
-
+        //var_dump($data);die;
         return view('admin.cliente.index', ['data' => $data]);
     }
 

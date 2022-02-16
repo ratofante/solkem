@@ -14,7 +14,7 @@
                 <div class="card">
                     <div class="card-header">
                         <i class="fa fa-align-justify"></i> {{ trans('admin.cliente.actions.index') }}
-                        <a class="btn btn-primary btn-spinner btn-sm pull-right m-b-0" href="{{ url('admin/clientes/create') }}" role="button"><i class="fa fa-plus"></i>&nbsp; {{ trans('admin.cliente.actions.create') }}</a>
+
                     </div>
                     <div class="card-body" v-cloak>
                         <div class="card-block">
@@ -30,7 +30,7 @@
                                     </div>
                                     <div class="col-sm-auto form-group ">
                                         <select class="form-control" v-model="pagination.state.per_page">
-                                            
+
                                             <option value="10">10</option>
                                             <option value="25">25</option>
                                             <option value="100">100</option>
@@ -49,12 +49,11 @@
                                             </label>
                                         </th>
 
-                                        <th is='sortable' :column="'id'">{{ trans('admin.cliente.columns.id') }}</th>
                                         <th is='sortable' :column="'cuit'">{{ trans('admin.cliente.columns.cuit') }}</th>
                                         <th is='sortable' :column="'razon_social'">{{ trans('admin.cliente.columns.razon_social') }}</th>
                                         <th is='sortable' :column="'telefono'">{{ trans('admin.cliente.columns.telefono') }}</th>
                                         <th is='sortable' :column="'direccion'">{{ trans('admin.cliente.columns.direccion') }}</th>
-                                        <th is='sortable' :column="'usuario_id'">{{ trans('admin.cliente.columns.usuario_id') }}</th>
+                                        <th is='sortable' :column="'usuario_id'">E-mail</th>
 
                                         <th></th>
                                     </tr>
@@ -78,13 +77,13 @@
                                             </label>
                                         </td>
 
-                                    <td>@{{ item.id }}</td>
+
                                         <td>@{{ item.cuit }}</td>
                                         <td>@{{ item.razon_social }}</td>
                                         <td>@{{ item.telefono }}</td>
                                         <td>@{{ item.direccion }}</td>
-                                        <td>@{{ item.usuario_id }}</td>
-                                        
+                                        <td>@{{ item.email }}</td>
+
                                         <td>
                                             <div class="row no-gutters">
                                                 <div class="col-auto">

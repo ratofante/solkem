@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Brackets\AdminAuth\Models\AdminUser;
 use Illuminate\Database\Eloquent\Model;
 
 class Cliente extends Model
@@ -35,5 +36,9 @@ class Cliente extends Model
     public function orden()
     {
         $this->hasMany('orden');
+    }
+    public function admin_users()
+    {
+        return $this->belongsTo(AdminUser::class);
     }
 }

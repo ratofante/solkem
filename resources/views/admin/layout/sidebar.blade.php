@@ -14,7 +14,7 @@
             @endcan
 
             @can('admin.sucursal')
-                <li class="nav-item"><a class="nav-link" href="{{ url('admin/sucursals') }}"><i class="nav-icon icon-globe"></i> {{ trans('admin.sucursal.title') }}</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url('admin/sucursals') }}"><i class="nav-icon icon-globe"></i> Sucursales</a></li>
             @endcan
 
             @can('admin.estado-orden')
@@ -23,8 +23,8 @@
 
            {{-- Do not delete me :) I'm used for auto-generation menu items --}}
             @can('admin.admin-user.index')
-                <li class="nav-title">{{ trans('brackets/admin-ui::admin.sidebar.settings') }}</li>
-                <li class="nav-item"><a class="nav-link" href="{{ url('admin/admin-users') }}"><i class="nav-icon icon-user"></i> {{ __('Manage access') }}</a></li>
+                <li class="nav-title">Usuarios</li>
+                <li class="nav-item"><a class="nav-link" href="{{ url('admin/admin-users') }}"><i class="nav-icon icon-user"></i> Gestión usuarios</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ url('admin/translations') }}"><i class="nav-icon icon-location-pin"></i> {{ __('Translations') }}</a></li>
             @endcan
 

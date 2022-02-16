@@ -1,0 +1,50 @@
+body.homeBody {
+    background: aliceblue;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    & .homeContainer {
+        position: relative;
+        bottom: 50px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 100;
+        & .logoDiv {
+            position: relative;
+            bottom: 10px;
+            max-width: 90vw;
+            & img {
+                width: 100%;
+            }
+        }
+        & .ingresarButton {
+            position: absolute;
+            top: 105px;
+            z-index: 50;
+            padding: .5rem 1rem;
+            background-color: #1c3a6d;
+            border-radius: 10px;
+            box-shadow: -2px 1px 1px #1c3a6d87;
+            &:hover {
+                box-shadow: -3px 2px 2px #1c3a6d87;
+                & a {
+                    text-decoration: none;
+                    font-size: 1.3rem;
+                }
+            }
+            & a {
+                color: #e9563e;
+                font-size: 1.2rem;
+                &:hover {
+                    text-decoration: none;
+                    font-size: 1.3rem;
+                }
+            }
+        }
+    }
+}

@@ -20998,3 +20998,57 @@ div.trumbowyg-dropdown-table table td.active {
     font-size: 0.875rem !important;
   }
 }
+body.homeBody {
+  background: aliceblue;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+body.homeBody .homeContainer {
+  position: relative;
+  bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+body.homeBody .homeContainer .logoDiv {
+  position: relative;
+  bottom: 10px;
+  max-width: 90vw;
+}
+body.homeBody .homeContainer .logoDiv img {
+  width: 100%;
+}
+body.homeBody .homeContainer .ingresarButton {
+  position: absolute;
+  top: 105px;
+  z-index: 50;
+  padding: 0.5rem 1rem;
+  background-color: #1c3a6d;
+  border-radius: 10px;
+  box-shadow: -2px 1px 1px #1c3a6d87;
+}
+body.homeBody .homeContainer .ingresarButton:hover {
+  box-shadow: -3px 2px 2px #1c3a6d87;
+}
+body.homeBody .homeContainer .ingresarButton:hover a {
+  text-decoration: none;
+  font-size: 1.3rem;
+}
+body.homeBody .homeContainer .ingresarButton a {
+  color: #e9563e;
+  font-size: 1.2rem;
+}
+body.homeBody .homeContainer .ingresarButton a:hover {
+  text-decoration: none;
+  font-size: 1.3rem;
+}
+
+.logoImg {
+  max-height: 36px !important;
+}
