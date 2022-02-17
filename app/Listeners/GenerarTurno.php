@@ -29,7 +29,7 @@ class GenerarTurno
     {
         Turno::create([
             'orden_id' => $event->orden->id,
-            'sucursal_id' => 1,
+            'sucursal_id' => 2,
         ]);
     }
 }

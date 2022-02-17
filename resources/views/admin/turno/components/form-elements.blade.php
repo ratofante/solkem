@@ -19,7 +19,7 @@
         <div v-if="errors.has('paraEntrega')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('paraEntrega') }}</div>
     </div>
 </div>
-
+{{--
 <div class="form-group row align-items-center" :class="{'has-danger': errors.has('orden_id'), 'has-success': fields.orden_id && fields.orden_id.valid }">
     <label for="orden_id" class="col-form-label text-md-right" :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.turno.columns.orden_id') }}</label>
         <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
@@ -27,7 +27,7 @@
         <div v-if="errors.has('orden_id')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('orden_id') }}</div>
     </div>
 </div>
-
+--}}
 <div class="form-group row align-items-center" :class="{'has-danger': errors.has('sucursal_id'), 'has-success': fields.sucursal_id && fields.sucursal_id.valid }">
     <label for="sucursal_id" class="col-form-label text-md-right" :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.turno.columns.sucursal_id') }}</label>
         <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">

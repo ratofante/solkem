@@ -21052,3 +21052,7 @@ body.homeBody .homeContainer .ingresarButton a:hover {
 .logoImg {
   max-height: 36px !important;
 }
+
+.fixTd {
+  justify-content: flex-start !important;
+}

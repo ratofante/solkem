@@ -43,4 +43,8 @@ class Orden extends Model
     {
         return $this->hasOne(EstadoOrden::class, 'orden_id');
     }
+    public function turno()
+    {
+        return $this->hasOne(Turno::class, 'orden_id');
+    }
 }

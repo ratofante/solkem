@@ -41,20 +41,30 @@
                             <table class="table table-hover table-listing">
                                 <thead>
                                     <tr>
+                                        @can('admin.turno.create')
                                         <th class="bulk-checkbox">
                                             <input class="form-check-input" id="enabled" type="checkbox" v-model="isClickedAll" v-validate="''" data-vv-name="enabled"  name="enabled_fake_element" @click="onBulkItemsClickedAllWithPagination()">
                                             <label class="form-check-label" for="enabled">
                                                 #
                                             </label>
                                         </th>
+                                        @endcan
 
-                                        <th is='sortable' :column="'id'">{{ trans('admin.turno.columns.id') }}</th>
+
                                         <th is='sortable' :column="'fechaHora'">{{ trans('admin.turno.columns.fechaHora') }}</th>
-                                        <th is='sortable' :column="'paraEntrega'">{{ trans('admin.turno.columns.paraEntrega') }}</th>
                                         <th is='sortable' :column="'orden_id'">{{ trans('admin.turno.columns.orden_id') }}</th>
+                                        <th is='sortable' :column="'paraEntrega'">{{ trans('admin.turno.columns.paraEntrega') }}</th>
+
+                                        @cannot('admin.turno.create')
+                                            <th>Detalle del Pedido</th>
+                                        @endcannot
+
                                         <th is='sortable' :column="'sucursal_id'">{{ trans('admin.turno.columns.sucursal_id') }}</th>
 
-                                        <th></th>
+                                        @can('admin.turno.create')
+                                            <th></th>
+                                        @endcan
+
                                     </tr>
                                     <tr v-show="(clickedBulkItemsCount > 0) || isClickedAll">
                                         <td class="bg-bulk-info d-table-cell text-center" colspan="7">
@@ -70,31 +80,43 @@
                                 </thead>
                                 <tbody>
                                     <tr v-for="(item, index) in collection" :key="item.id" :class="bulkItems[item.id] ? 'bg-bulk' : ''">
+                                        @can('admin.turno.create')
                                         <td class="bulk-checkbox">
                                             <input class="form-check-input" :id="'enabled' + item.id" type="checkbox" v-model="bulkItems[item.id]" v-validate="''" :data-vv-name="'enabled' + item.id"  :name="'enabled' + item.id + '_fake_element'" @click="onBulkItemClicked(item.id)" :disabled="bulkCheckingAllLoader">
                                             <label class="form-check-label" :for="'enabled' + item.id">
                                             </label>
                                         </td>
+                                        @endcan
 
-                                        <td>@{{ item.id }}</td>
+
                                         <td>@{{ item.fechaHora | datetime }}</td>
+                                        <td>@{{ item.orden.nroOrden }}</td>
 
                                         <td v-if="item.paraEntrega=='1'">Para entrega</td>
                                         <td v-else>Retiro en sucursal</td>
 
-                                        <td>@{{ item.orden.nroOrden }}</td>
-                                        <td>@{{ item.sucursal.nombre }}</td>
 
+
+                                        @cannot('admin.turno.create')
+                                            <td>@{{ item.orden.detalles }}</td>
+                                        @endcannot
+
+                                        <td class="fixTd">@{{ item.sucursal.nombre }}</td>
+
+
+                                        @can('admin.turno.create')
                                         <td>
                                             <div class="row no-gutters">
                                                 <div class="col-auto">
-                                                    <a class="btn btn-sm btn-spinner btn-info" :href="item.resource_url + '/edit'" title="{{ trans('brackets/admin-ui::admin.btn.edit') }}" role="button"><i class="fa fa-edit"></i></a>
+                                                    <a class="btn btn-sm btn-spinner btn-info" :href="item.resource_url + '/edit'" title="{{ trans('brackets/admin-ui::admin.btn.edit') }}" role="button"><i class="fa fa-edit"></i>Asignar fecha</a>
                                                 </div>
                                                 <form class="col" @submit.prevent="deleteItem(item.resource_url)">
                                                     <button type="submit" class="btn btn-sm btn-danger" title="{{ trans('brackets/admin-ui::admin.btn.delete') }}"><i class="fa fa-trash-o"></i></button>
                                                 </form>
                                             </div>
                                         </td>
+                                        @endcan
+
                                     </tr>
                                 </tbody>
                             </table>
@@ -112,7 +134,7 @@
                                 <i class="icon-magnifier"></i>
                                 <h3>{{ trans('brackets/admin-ui::admin.index.no_items') }}</h3>
                                 <p>{{ trans('brackets/admin-ui::admin.index.try_changing_items') }}</p>
-                                <a class="btn btn-primary btn-spinner" href="{{ url('admin/turnos/create') }}" role="button"><i class="fa fa-plus"></i>&nbsp; {{ trans('admin.turno.actions.create') }}</a>
+                                <p>Si realizaste un pedido y no lo encuentras, comunícate con Solkem</p>
                             </div>
                         </div>
                     </div>

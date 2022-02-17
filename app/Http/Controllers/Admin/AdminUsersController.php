@@ -23,6 +23,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
 class AdminUsersController extends Controller
@@ -62,14 +63,20 @@ class AdminUsersController extends Controller
             ['id', 'first_name', 'last_name', 'email', 'activated', 'forbidden', 'language', 'last_login_at'],
 
             // set columns to searchIn
-            ['id', 'first_name', 'last_name', 'email', 'language']
+            ['id', 'first_name', 'last_name', 'email', 'language'],
+
         );
+
+
+            $resultado = DB::select(DB::raw("SELECT * FROM `admin_users` JOIN `model_has_roles` ON admin_users.id = model_has_roles.model_id JOIN `roles` ON model_has_roles.role_id = roles.id;"));
+
 
         if ($request->ajax()) {
             return ['data' => $data, 'activation' => Config::get('admin-auth.activation_enabled')];
         }
-
-        return view('admin.admin-user.index', ['data' => $data, 'activation' => Config::get('admin-auth.activation_enabled')]);
+        //var_dump($resultado);die;
+        return view('admin.admin-user.index', ['data' => $data, 'activation' => Config::get('admin-auth.activation_enabled'),
+            'resultado' => $resultado]);
     }
 
     /**

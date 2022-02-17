@@ -53,6 +53,7 @@
                                         <th is='sortable' :column="'nroOrden'">{{ trans('admin.orden.columns.nroOrden') }}</th>
                                         <th is='sortable' :column="'cliente_id'">{{ trans('admin.orden.columns.cliente_id') }}</th>
                                         <th is='sortable' :column="'detalles'">{{ trans('admin.orden.columns.detalles') }}</th>
+                                        <th is='sortable' :column="'fechaHora'">Turno</th>
                                         <th is='sortable' :column="'estado'">Estado</th>
 
                                         <th></th>
@@ -81,12 +82,21 @@
                                         <td>@{{ item.nroOrden }}</td>
                                         <td>@{{ item.cliente.razon_social}}</td>
                                         <td>@{{ item.detalles }}</td>
+
+                                        <td v-if="item.turno.fechaHora==null">Sin asignar</td>
+                                        <td v-else>@{{ item.turno.fechaHora | datetime}}</td>
+
+
                                         <td v-if="item.estado_orden.estado_id=='1'">No ha sido entregado</td>
+                                        <td v-else-if="item.estado_orden.estado_id=='3'">Entrega parcial</td>
                                         <td v-else>Entregado</td>
 
 
                                         <td>
                                             <div class="row no-gutters">
+                                                <div class="col-auto">
+                                                    <a class="btn btn-sm btn-spinner btn-info" :href="'turnos/'+ item.turno.id + '/edit'" title="{{ trans('brackets/admin-ui::admin.btn.edit') }}" role="button"><i class="fa fa-edit"></i>  Asignar Horario</a>
+                                                </div>
                                                 <div class="col-auto">
                                                     <a class="btn btn-sm btn-spinner btn-info" :href="item.resource_url + '/edit'" title="{{ trans('brackets/admin-ui::admin.btn.edit') }}" role="button"><i class="fa fa-edit"></i></a>
                                                 </div>

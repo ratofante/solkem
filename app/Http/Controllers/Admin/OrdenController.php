@@ -47,6 +47,9 @@ class OrdenController extends Controller
                 $query->with(['cliente']);
                 $query->join('cliente', 'cliente.id', '=', 'orden.cliente_id');
 
+                $query->with(['turno']);
+                $query->join('turno', 'orden.id','=','turno.orden_id');
+
                 $query->with(['estado_orden']);
                 $query->join('estado_orden', 'orden.id', '=', 'estado_orden.orden_id');
                 $query->join('estado', 'estado_orden.estado_id','=','estado.id');
@@ -131,6 +134,7 @@ class OrdenController extends Controller
 
         return view('admin.orden.edit', [
             'orden' => $orden,
+            'clientes' => Cliente::select('id','razon_social')->get()
         ]);
     }
 

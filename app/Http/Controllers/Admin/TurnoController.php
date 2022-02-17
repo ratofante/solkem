@@ -71,11 +71,11 @@ class TurnoController extends Controller
             ['id', 'fechaHora', 'paraEntrega', 'orden_id', 'sucursal_id'],
 
             function($query){
-                $query->with(['sucursal']);
-                $query->join('sucursal', 'turno.sucursal_id', "=", 'sucursal.id');
-
                 $query->with(['orden']);
                 $query->join('orden', 'turno.orden_id',"=",'orden.id');
+
+                $query->with(['sucursal']);
+                $query->join('sucursal', 'turno.sucursal_id', "=", 'sucursal.id');
             },
         );
         //var_dump($data);die;
