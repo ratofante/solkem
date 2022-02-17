@@ -153,5 +153,25 @@ return [
         ],
     ],
 
+    'turno' => [
+        'title' => 'Turno',
+
+        'actions' => [
+            'index' => 'Turno',
+            'create' => 'New Turno',
+            'edit' => 'Edit :name',
+            'export' => 'Export',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'fechaHora' => 'FechaHora',
+            'paraEntrega' => 'ParaEntrega',
+            'orden_id' => 'Orden',
+            'sucursal_id' => 'Sucursal',
+            
+        ],
+    ],
+
     // Do not delete me :) I'm used for auto-generation
 ];

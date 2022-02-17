@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Turno extends Model
 {
-    protected $table = 'turno';
+    protected $table = 'Turno';
 
     protected $fillable = [
         'fechaHora',
@@ -15,6 +15,7 @@ class Turno extends Model
         'sucursal_id',
 
     ];
+
 
     protected $dates = [
         'fechaHora',
@@ -30,6 +31,7 @@ class Turno extends Model
     {
         return url('/admin/turnos/'.$this->getKey());
     }
+    /******** RELATIONS */
     public function orden()
     {
         return $this->belongsTo(Orden::class);

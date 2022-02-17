@@ -1,3 +1,4 @@
+
 <div class="form-group row align-items-center" :class="{'has-danger': errors.has('fechaHora'), 'has-success': fields.fechaHora && fields.fechaHora.valid }">
     <label for="fechaHora" class="col-form-label text-md-right" :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.turno.columns.fechaHora') }}</label>
     <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
@@ -38,5 +39,3 @@
         </select>
         </div>
 </div>
-
-

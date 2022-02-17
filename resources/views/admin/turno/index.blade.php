@@ -14,6 +14,8 @@
                 <div class="card">
                     <div class="card-header">
                         <i class="fa fa-align-justify"></i> {{ trans('admin.turno.actions.index') }}
+                        <a class="btn btn-primary btn-sm pull-right m-b-0 ml-2" href="{{ url('admin/turnos/export') }}" role="button"><i class="fa fa-file-excel-o"></i>&nbsp; {{ trans('admin.turno.actions.export') }}</a>
+                        <a class="btn btn-primary btn-spinner btn-sm pull-right m-b-0" href="{{ url('admin/turnos/create') }}" role="button"><i class="fa fa-plus"></i>&nbsp; {{ trans('admin.turno.actions.create') }}</a>
                     </div>
                     <div class="card-body" v-cloak>
                         <div class="card-block">
@@ -64,7 +66,6 @@
                                         @can('admin.turno.create')
                                             <th></th>
                                         @endcan
-
                                     </tr>
                                     <tr v-show="(clickedBulkItemsCount > 0) || isClickedAll">
                                         <td class="bg-bulk-info d-table-cell text-center" colspan="7">
@@ -116,7 +117,6 @@
                                             </div>
                                         </td>
                                         @endcan
-
                                     </tr>
                                 </tbody>
                             </table>
@@ -134,7 +134,7 @@
                                 <i class="icon-magnifier"></i>
                                 <h3>{{ trans('brackets/admin-ui::admin.index.no_items') }}</h3>
                                 <p>{{ trans('brackets/admin-ui::admin.index.try_changing_items') }}</p>
-                                <p>Si realizaste un pedido y no lo encuentras, comunícate con Solkem</p>
+                                <a class="btn btn-primary btn-spinner" href="{{ url('admin/turnos/create') }}" role="button"><i class="fa fa-plus"></i>&nbsp; {{ trans('admin.turno.actions.create') }}</a>
                             </div>
                         </div>
                     </div>

@@ -118,3 +118,19 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
         });
     });
 });
+
+/* Auto-generated admin routes */
+Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
+    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
+        Route::prefix('turnos')->name('turnos/')->group(static function() {
+            Route::get('/',                                             'TurnoController@index')->name('index');
+            Route::get('/create',                                       'TurnoController@create')->name('create');
+            Route::post('/',                                            'TurnoController@store')->name('store');
+            Route::get('/{turno}/edit',                                 'TurnoController@edit')->name('edit');
+            Route::post('/bulk-destroy',                                'TurnoController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{turno}',                                     'TurnoController@update')->name('update');
+            Route::delete('/{turno}',                                   'TurnoController@destroy')->name('destroy');
+            Route::get('/export',                                       'TurnoController@export')->name('export');
+        });
+    });
+});

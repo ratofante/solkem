@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\TurnoExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Turno\BulkDestroyTurno;
 use App\Http\Requests\Admin\Turno\DestroyTurno;
 use App\Http\Requests\Admin\Turno\IndexTurno;
 use App\Http\Requests\Admin\Turno\StoreTurno;
 use App\Http\Requests\Admin\Turno\UpdateTurno;
-use App\Models\Sucursal;
 use App\Models\Turno;
 use Brackets\AdminListing\Facades\AdminListing;
 use Exception;
@@ -19,12 +19,14 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Illuminate\View\View;
 
 class TurnoController extends Controller
 {
 
-    /**
+       /**
      * Display a listing of the resource.
      *
      * @param IndexTurno $request
@@ -93,19 +95,6 @@ class TurnoController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @throws AuthorizationException
-     * @return Factory|View
-     */
-    public function create()
-    {
-        $this->authorize('admin.turno.create');
-
-        return view('admin.turno.create');
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param StoreTurno $request
@@ -154,7 +143,6 @@ class TurnoController extends Controller
 
         return view('admin.turno.edit', [
             'turno' => $turno,
-            'sucursales' => Sucursal::select('id','nombre')->get()
         ]);
     }
 
@@ -222,5 +210,15 @@ class TurnoController extends Controller
         });
 
         return response(['message' => trans('brackets/admin-ui::admin.operation.succeeded')]);
+    }
+
+    /**
+     * Export entities
+     *
+     * @return BinaryFileResponse|null
+     */
+    public function export(): ?BinaryFileResponse
+    {
+        return Excel::download(app(TurnoExport::class), 'turnos.xlsx');
     }
 }

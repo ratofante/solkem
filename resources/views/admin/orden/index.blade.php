@@ -3,7 +3,6 @@
 @section('title', trans('admin.orden.actions.index'))
 
 @section('body')
-
     <orden-listing
         :data="{{ $data->toJson() }}"
         :url="'{{ url('admin/ordens') }}'"
