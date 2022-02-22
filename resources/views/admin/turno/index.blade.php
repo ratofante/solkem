@@ -14,8 +14,16 @@
                 <div class="card">
                     <div class="card-header">
                         <i class="fa fa-align-justify"></i> {{ trans('admin.turno.actions.index') }}
+
                         <a class="btn btn-primary btn-sm pull-right m-b-0 ml-2" href="{{ url('admin/turnos/export') }}" role="button"><i class="fa fa-file-excel-o"></i>&nbsp; {{ trans('admin.turno.actions.export') }}</a>
                         <a class="btn btn-primary btn-spinner btn-sm pull-right m-b-0" href="{{ url('admin/turnos/create') }}" role="button"><i class="fa fa-plus"></i>&nbsp; {{ trans('admin.turno.actions.create') }}</a>
+
+
+                        <a class="btn btn-primary btn-sm pull-right m-b-0 mr-2" href="/calendar" role="button">
+                            <i class="fa fa-calendar"></i> &nbsp;
+                            Calendario
+                        </a>
+
                     </div>
                     <div class="card-body" v-cloak>
                         <div class="card-block">
