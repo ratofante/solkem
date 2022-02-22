@@ -8,7 +8,10 @@
     <title>@yield('title', 'Craftable') - {{ trans('brackets/admin-ui::admin.page_title_suffix') }}</title>
 
     <!-- bootstrap 5 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">-->
+
+    <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css' rel='stylesheet'>
+    <link href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css' rel='stylesheet'>
 
     <!-- probé con estos para iniciarlos según los docs de la página. No me funcionó -->
     <!--
@@ -66,12 +69,12 @@
     <script>
         $(document).ready(function() {
             var calendar = $('#calendar').fullCalendar({
+                themeSystem: 'bootstrap5',
                 selectable: true,
                 height: 650,
                 showNonCurrentDates: false,
                 editable: false,
                 defaultView: 'month',
-                yearColumns: 3,
                 header: {
                     left: 'prev,next today',
                     center: 'title',
@@ -92,7 +95,7 @@
                         hide:{effect:'clip', duration:250}
                     });
                 }
-            })
+            });
         })
 
         //Fracaso rotundo..
@@ -104,5 +107,6 @@
             calendar.render();
         });*/
     </script>
+    <script scr="{{ asset('js/app.js') }}"></script>
 </body>
 </html>
