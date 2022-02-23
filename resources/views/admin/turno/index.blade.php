@@ -16,7 +16,6 @@
                         <i class="fa fa-align-justify"></i> {{ trans('admin.turno.actions.index') }}
 
                         <a class="btn btn-primary btn-sm pull-right m-b-0 ml-2" href="{{ url('admin/turnos/export') }}" role="button"><i class="fa fa-file-excel-o"></i>&nbsp; {{ trans('admin.turno.actions.export') }}</a>
-                        <a class="btn btn-primary btn-spinner btn-sm pull-right m-b-0" href="{{ url('admin/turnos/create') }}" role="button"><i class="fa fa-plus"></i>&nbsp; {{ trans('admin.turno.actions.create') }}</a>
 
 
                         <a class="btn btn-primary btn-sm pull-right m-b-0 mr-2" href="/calendar" role="button">
@@ -71,7 +70,10 @@
 
                                         <th is='sortable' :column="'sucursal_id'">{{ trans('admin.turno.columns.sucursal_id') }}</th>
 
+
+
                                         @can('admin.turno.create')
+                                            <th class="text-center">Entregado</th>
                                             <th></th>
                                         @endcan
                                     </tr>
@@ -110,10 +112,17 @@
                                             <td>@{{ item.orden.detalles }}</td>
                                         @endcannot
 
-                                        <td class="fixTd">@{{ item.sucursal.nombre }}</td>
+                                        <td v-if="item.paraEntrega=='1'" class="fixTd">@{{ item.orden.cliente.direccion }}</td>
+                                        <td v-else class="fixTd">@{{ item.sucursal.nombre }}</td>
 
 
                                         @can('admin.turno.create')
+                                        <td>
+                                            <label class="switch switch-3d switch-success">
+                                                <input type="checkbox" class="switch-input">
+                                                <span class="switch-slider"></span>
+                                            </label>
+                                        </td>
                                         <td>
                                             <div class="row no-gutters">
                                                 <div class="col-auto">

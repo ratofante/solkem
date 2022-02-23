@@ -79,6 +79,9 @@ class TurnoController extends Controller
 
                 $query->with(['sucursal']);
                 $query->join('sucursal', 'turno.sucursal_id', "=", 'sucursal.id');
+
+                $query->with('orden.cliente');
+                $query->join('cliente', 'orden.cliente_id', '=', 'cliente.id');
             },
         );
         //var_dump($data);die;
@@ -90,7 +93,7 @@ class TurnoController extends Controller
             }
             return ['data' => $data];
         }
-
+        //dd($data);
         return view('admin.turno.index', ['data' => $data]);
         }
     }

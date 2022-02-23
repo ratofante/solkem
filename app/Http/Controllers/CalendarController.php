@@ -14,7 +14,6 @@ class CalendarController extends Controller
             /*$data = SolkemEvents::whereDate('event_start', '>=', $request->start)
                 ->whereDate('event_end',   '<=', $request->end)
                 ->get(['id', 'event_name', 'event_start', 'event_end']);
-
                 $events=[];
                 foreach($data as $event) {
                     $events[]=[
@@ -40,28 +39,29 @@ class CalendarController extends Controller
                         'end' => ''
                     ];
                 }
-
                 return response()->json($turnos);
-
-
-                //return response()->json($data);
-
-                //return response()->json($events);
         }
+        //var_dump($request->start); die;
+        $data = Turno::select('fechaHora','razon_social','nombre')
+            ->join('sucursal', 'turno.sucursal_id','=','sucursal.id')
+            ->join('orden','turno.orden_id','=','orden.id')
+            ->join('cliente','orden.cliente_id','=','cliente.id')
+            ->get();
 
+            $turnos = [];
+            foreach($data as $turno) {
+                $turnos[]=[
+                    'allDay' => 'true',
+                    'title' => substr($turno->fechaHora, 10, 6).' - '.$turno->razon_social.' en '.$turno->nombre,
+                    'start' => $turno->fechaHora,
+                    'end' => ''
+                ];
+            };
+            // Si saco este echo se rompe todo ¿?
+            echo "<br><br><br>";
+            json_encode($turnos);
 
-
-        /*$turnos = Turno::all();
-        $horarios = [];
-        foreach( $turnos as $turno ) {
-            $horarios[] = [
-                'id' => $turno->id,
-                'horario' => $turno->fechaHora
-            ];
-        }*/
-        //dd($data);
-        //var_dump(json_encode($horarios));
-        return view('calendar.index');
+        return view('calendar.calendar', ['events' => $turnos]);
     }
 
     public function calendarEvents(Request $request)

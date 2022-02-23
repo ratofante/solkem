@@ -14,12 +14,14 @@
         <h2 class="h2 text-center mb-5 border-bottom pb-3">Calendario
             <img class="w-25 h-auto" src="{{ asset('images/logo-solkem.png') }}" alt="Solkem-Logo">
         </h2>
-        <div id='full_calendar_events'></div>
+        <div id='calendar'></div>
     </div>
     {{-- Scripts --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script>
         $(document).ready(function () {
@@ -29,7 +31,15 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-            var calendar = $('#full_calendar_events').fullCalendar({
+            const calendar = $('#calendar').fullCalendar({
+                height: 'auto',
+                width: '95%',
+                expandRows: true,
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+                },
                 editable: true,
                 events: SITEURL + "/calendar",
                 displayEventTime: true,
@@ -119,6 +129,7 @@
         function displayMessage(message) {
             toastr.success(message, 'Event');
         }
+
     </script>
 </body>
 </html>
