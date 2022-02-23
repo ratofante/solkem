@@ -9,6 +9,7 @@ use App\Http\Requests\Admin\Turno\DestroyTurno;
 use App\Http\Requests\Admin\Turno\IndexTurno;
 use App\Http\Requests\Admin\Turno\StoreTurno;
 use App\Http\Requests\Admin\Turno\UpdateTurno;
+use App\Models\Sucursal;
 use App\Models\Turno;
 use Brackets\AdminListing\Facades\AdminListing;
 use Exception;
@@ -140,9 +141,12 @@ class TurnoController extends Controller
     {
         $this->authorize('admin.turno.edit', $turno);
 
+        $sucursales = Sucursal::select('id', 'nombre', 'apertura', 'cierre')
+            ->get();
 
         return view('admin.turno.edit', [
             'turno' => $turno,
+            'sucursales' => $sucursales
         ]);
     }
 

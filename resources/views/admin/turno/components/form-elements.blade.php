@@ -34,7 +34,7 @@
         <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
         <select name="sucursal_id" id="sucursal_id" v-model="form.sucursal_id" class="form-control">
             @foreach ($sucursales as $sucursal)
-                <option value="{{ $sucursal->id }}">{{ $sucursal->nombre }}</option>
+                <option value="{{ $sucursal->id }}">{{ $sucursal->nombre }}, de {{ $sucursal->apertura }} a {{ $sucursal->cierre }}</option>
             @endforeach
         </select>
         </div>
