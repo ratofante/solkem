@@ -33,10 +33,12 @@ class CalendarController extends Controller
                 $turnos = [];
                 foreach($data as $turno) {
                     $turnos[]=[
-                        'allDay' => 'true',
+                        'id' => $turno->id,
+                        'allDay' => 'false',
                         'title' => $turno->razon_social.' en '.$turno->nombre,
                         'start' => $turno->fechaHora,
-                        'end' => ''
+                        'end' => '',
+                        'description' => $turno->razon_social
                     ];
                 }
                 return response()->json($turnos);
@@ -51,12 +53,19 @@ class CalendarController extends Controller
             $turnos = [];
             foreach($data as $turno) {
                 $turnos[]=[
-                    'allDay' => 'true',
+                    //'allDay' => 'false',
                     'title' => substr($turno->fechaHora, 10, 6).' - '.$turno->razon_social.' en '.$turno->nombre,
                     'start' => $turno->fechaHora,
-                    'end' => ''
+                    'end' => date('Y-m-d G:i',strtotime($turno->fechaHora)+3600)
                 ];
+                //echo $turno->fechaHora.' - '.date('Y-m-d H:i:s',strtotime($turno->fechaHora)+3600) .'<br>';
             };
+
+            /*foreach($turnos as $e){
+                echo $e['start'].'<br>';
+                echo date('G:i d-m-Y',strtotime($e['start'])).' - '.date('G:i d-m-Y',strtotime($e['start'])+3600).'<br>';
+            }*/
+
             // Si saco este echo se rompe todo ¿?
             echo "<br><br><br>";
             json_encode($turnos);

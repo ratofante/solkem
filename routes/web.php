@@ -133,7 +133,8 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
             Route::post('/bulk-destroy',                                'TurnoController@bulkDestroy')->name('bulk-destroy');
             Route::post('/{turno}',                                     'TurnoController@update')->name('update');
             Route::delete('/{turno}',                                   'TurnoController@destroy')->name('destroy');
-            Route::get('/export',                                       'TurnoController@export')->name('export');
+            Route::get('/export',                                       'TurnoController@exportTurno')->name('export');
+            Route::get('/listo',                                        'TurnoController@turnoListo');
         });
     });
 });

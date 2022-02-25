@@ -52,7 +52,7 @@
                 },
                 initialView: 'dayGridMonth',
                 navLinks: true, // can click day/week names to navigate views
-                editable: true,
+                editable: false,
                 selectable: true,
                 nowIndicator: true,
                 dayMaxEvents: true, // allow "more" link when too many events

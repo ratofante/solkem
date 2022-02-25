@@ -73,7 +73,7 @@
 
 
                                         @can('admin.turno.create')
-                                            <th class="text-center">Entregado</th>
+                                            <th>Entregado</th>
                                             <th></th>
                                         @endcan
                                     </tr>
@@ -117,11 +117,18 @@
 
 
                                         @can('admin.turno.create')
-                                        <td>
-                                            <label class="switch switch-3d switch-success">
-                                                <input type="checkbox" class="switch-input">
-                                                <span class="switch-slider"></span>
-                                            </label>
+                                        <td class="fixTd">
+                                            <a class="btn btn-success btn-sm m-b-0" href="{{ url('admin/turnos/listo') }}" role="button">Listo
+                                                <i class="fa fa-check-circle ml-2"></i>&nbsp;
+                                            </a>
+                                            {{--
+                                            <button type='' class='btn'>
+                                                <label class="switch switch-3d switch-success">
+                                                    <input type="checkbox" class="switch-input">
+                                                    <span class="switch-slider"></span>
+                                                </label>
+                                            </button>--}}
+
                                         </td>
                                         <td>
                                             <div class="row no-gutters">

@@ -9,6 +9,7 @@ use App\Http\Requests\Admin\Turno\DestroyTurno;
 use App\Http\Requests\Admin\Turno\IndexTurno;
 use App\Http\Requests\Admin\Turno\StoreTurno;
 use App\Http\Requests\Admin\Turno\UpdateTurno;
+use App\Models\Orden;
 use App\Models\Sucursal;
 use App\Models\Turno;
 use Brackets\AdminListing\Facades\AdminListing;
@@ -82,6 +83,9 @@ class TurnoController extends Controller
 
                 $query->with('orden.cliente');
                 $query->join('cliente', 'orden.cliente_id', '=', 'cliente.id');
+
+                $query->with('orden.estado_orden');
+                $query->join('estado_orden', 'orden.id', '=','estado_orden.orden_id');
             },
         );
         //var_dump($data);die;
@@ -93,7 +97,7 @@ class TurnoController extends Controller
             }
             return ['data' => $data];
         }
-        //dd($data);
+        //dd($Data);
         return view('admin.turno.index', ['data' => $data]);
         }
     }
@@ -224,8 +228,17 @@ class TurnoController extends Controller
      *
      * @return BinaryFileResponse|null
      */
-    public function export(): ?BinaryFileResponse
+    /*public function export(): ?BinaryFileResponse
     {
         return Excel::download(app(TurnoExport::class), 'turnos.xlsx');
+    }*/
+    public function exportTurno()
+    {
+        return Excel::download(new TurnoExport, 'turnos.xlsx');
+    }
+
+    public function turnoListo()
+    {
+        return "Listo!";
     }
 }
