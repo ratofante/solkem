@@ -73,7 +73,7 @@
 
 
                                         @can('admin.turno.create')
-                                            <th>Entregado</th>
+                                            <th is='sortable'>Entregado</th>
                                             <th></th>
                                         @endcan
                                     </tr>
@@ -117,8 +117,9 @@
 
 
                                         @can('admin.turno.create')
-                                        <td class="fixTd">
-                                            <a class="btn btn-success btn-sm m-b-0" href="{{ url('admin/turnos/listo') }}" role="button">Listo
+                                        <td v-if="item.orden.estado_orden.estado_id==1" class="fixTd">
+                                            <a class="btn btn-success btn-sm m-b-0" :href="item.resource_url + '/listo'" role="button">
+                                                Listo @{{ item.orden.estado_orden.estado_id }}
                                                 <i class="fa fa-check-circle ml-2"></i>&nbsp;
                                             </a>
                                             {{--
@@ -128,7 +129,9 @@
                                                     <span class="switch-slider"></span>
                                                 </label>
                                             </button>--}}
-
+                                        </td>
+                                        <td v-else class="fixTd">
+                                            Entregado!
                                         </td>
                                         <td>
                                             <div class="row no-gutters">

@@ -134,7 +134,7 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
             Route::post('/{turno}',                                     'TurnoController@update')->name('update');
             Route::delete('/{turno}',                                   'TurnoController@destroy')->name('destroy');
             Route::get('/export',                                       'TurnoController@exportTurno')->name('export');
-            Route::get('/listo',                                        'TurnoController@turnoListo');
+            Route::get('/{turno}/listo',                                'TurnoController@turnoListo');
         });
     });
 });

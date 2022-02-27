@@ -9,6 +9,7 @@ use App\Http\Requests\Admin\Turno\DestroyTurno;
 use App\Http\Requests\Admin\Turno\IndexTurno;
 use App\Http\Requests\Admin\Turno\StoreTurno;
 use App\Http\Requests\Admin\Turno\UpdateTurno;
+use App\Models\EstadoOrden;
 use App\Models\Orden;
 use App\Models\Sucursal;
 use App\Models\Turno;
@@ -237,8 +238,12 @@ class TurnoController extends Controller
         return Excel::download(new TurnoExport, 'turnos.xlsx');
     }
 
-    public function turnoListo()
+    public function turnoListo(Turno $turno)
     {
-        return "Listo!";
+        $orden_id = $turno->orden_id;
+        EstadoOrden::where('orden_id', $orden_id)->update(['estado_id' => 2]);
+
+        return redirect()->back();
+
     }
 }
