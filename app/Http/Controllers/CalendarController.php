@@ -50,13 +50,14 @@ class CalendarController extends Controller
             ->join('cliente','orden.cliente_id','=','cliente.id')
             ->get();
 
+
             $turnos = [];
             foreach($data as $turno) {
                 $turnos[]=[
                     //'allDay' => 'false',
                     'title' => substr($turno->fechaHora, 10, 6).' - '.$turno->razon_social.' en '.$turno->nombre,
-                    'start' => $turno->fechaHora,
-                    'end' => date('Y-m-d G:i',strtotime($turno->fechaHora)+3600)
+                    'start' => $turno->fechaHora->format('Y-m-d H:i'),
+                    'end' => $turno->fechaHora->format('Y-m-d H:i')
                 ];
                 //echo $turno->fechaHora.' - '.date('Y-m-d H:i:s',strtotime($turno->fechaHora)+3600) .'<br>';
             };
@@ -67,6 +68,7 @@ class CalendarController extends Controller
             }*/
 
             // Si saco este echo se rompe todo ¿?
+            //var_dump($turnos); die;
             echo "<br><br><br>";
             json_encode($turnos);
 

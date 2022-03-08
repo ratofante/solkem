@@ -18,8 +18,8 @@
     <div class="container">
         <h2 class="h2 text-center mb-5 border-bottom pb-3">Calendario
         <img class="w-25 h-auto" src="{{ asset('images/logo-solkem.png') }}" alt="Solkem-Logo">
-    </h2>
-    <div id="calendar"></div>
+        </h2>
+        <div id="calendar"></div>
     </div>
 
 
@@ -57,7 +57,7 @@
                 nowIndicator: true,
                 dayMaxEvents: true, // allow "more" link when too many events
                 events: events,
-                displayEventTime: true,
+                displayEventTime: false,
             });
             calendar.render();
         });

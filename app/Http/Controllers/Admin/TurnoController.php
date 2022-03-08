@@ -21,6 +21,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
@@ -86,7 +87,9 @@ class TurnoController extends Controller
                 $query->join('cliente', 'orden.cliente_id', '=', 'cliente.id');
 
                 $query->with('orden.estado_orden');
-                $query->join('estado_orden', 'orden.id', '=','estado_orden.orden_id');
+                $query->join('estado_orden', 'orden.id', '=','estado_orden.orden_id')->orderBy('estado_orden.created_at', 'desc')->latest('estado_orden.created_at');
+
+
             },
         );
         //var_dump($data);die;
@@ -238,12 +241,31 @@ class TurnoController extends Controller
         return Excel::download(new TurnoExport, 'turnos.xlsx');
     }
 
-    public function turnoListo(Turno $turno)
+    public function controlEstado(Turno $turno)
     {
-        $orden_id = $turno->orden_id;
-        EstadoOrden::where('orden_id', $orden_id)->update(['estado_id' => 2]);
+        /*
+        $turno->orden_id
+        $turno->sucursal_id
+        $turno->fechaHora
+        $turno->paraEntrega
+        */
 
-        return redirect()->back();
+        $query = Turno::join('sucursal', 'turno.sucursal_id','=','sucursal.id')
+                ->join('orden', 'turno.orden_id','=','orden.id')
+                ->join('cliente', 'orden.cliente_id', '=', 'cliente.id')
+                ->join('estado_orden', 'orden.id', '=', 'estado_orden.orden_id')
+                ->select('estado_orden.usuario_id', 'estado_orden.orden_id', 'estado_orden.id', 'orden.created_at','sucursal.nombre', 'estado_orden.estado_id', 'estado_orden.updated_at','orden.nroOrden', 'orden.detalles', 'cliente.razon_social', 'turno.paraEntrega', 'turno.fechaHora')
+                ->where('turno.id', '=', $turno->id)
+                ->get()->toArray();
+
+        //var_dump($query[0]);
+        return view('control-estado.index', [
+            'data' => $query[0]
+        ]);
+        //$orden_id = $turno->orden_id;
+        //EstadoOrden::where('orden_id', $orden_id)->update(['estado_id' => 2]);
+
+        //return redirect()->back();
 
     }
 }

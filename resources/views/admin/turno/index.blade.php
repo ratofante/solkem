@@ -73,14 +73,15 @@
 
 
                                         @can('admin.turno.create')
-                                            <th is='sortable'>Entregado</th>
+                                            <th is='sortable' >Estado del Pedido</th>
                                             <th></th>
                                         @endcan
                                     </tr>
                                     <tr v-show="(clickedBulkItemsCount > 0) || isClickedAll">
                                         <td class="bg-bulk-info d-table-cell text-center" colspan="7">
                                             <span class="align-middle font-weight-light text-dark">{{ trans('brackets/admin-ui::admin.listing.selected_items') }} @{{ clickedBulkItemsCount }}.  <a href="#" class="text-primary" @click="onBulkItemsClickedAll('/admin/turnos')" v-if="(clickedBulkItemsCount < pagination.state.total)"> <i class="fa" :class="bulkCheckingAllLoader ? 'fa-spinner' : ''"></i> {{ trans('brackets/admin-ui::admin.listing.check_all_items') }} @{{ pagination.state.total }}</a> <span class="text-primary">|</span> <a
-                                                        href="#" class="text-primary" @click="onBulkItemsClickedAllUncheck()">{{ trans('brackets/admin-ui::admin.listing.uncheck_all_items') }}</a>  </span>
+                                                        href="#" class="text-primary" @click="onBulkItemsClickedAllUncheck()">{{ trans('brackets/admin-ui::admin.listing.uncheck_all_items') }}</a>
+                                            </span>
 
                                             <span class="pull-right pr-2">
                                                 <button class="btn btn-sm btn-danger pr-3 pl-3" @click="bulkDelete('/admin/turnos/bulk-destroy')">{{ trans('brackets/admin-ui::admin.btn.delete') }}</button>
@@ -117,26 +118,28 @@
 
 
                                         @can('admin.turno.create')
-                                        <td v-if="item.orden.estado_orden.estado_id==1" class="fixTd">
-                                            <a class="btn btn-success btn-sm m-b-0" :href="item.resource_url + '/listo'" role="button">
-                                                Listo @{{ item.orden.estado_orden.estado_id }}
-                                                <i class="fa fa-check-circle ml-2"></i>&nbsp;
+                                        <td v-if="item.orden.estado_orden.estado_id===1" class="fixTd">
+                                            <a class="btn btn-warning btn-sm m-b-0" style="width:90px" :href="item.resource_url + '/control-estado'" role="button">
+                                                Incompleto @{{ item.orden.estado_orden.estado_id }}
+                                                <i class="fa fa-edit"></i>&nbsp;
                                             </a>
-                                            {{--
-                                            <button type='' class='btn'>
-                                                <label class="switch switch-3d switch-success">
-                                                    <input type="checkbox" class="switch-input">
-                                                    <span class="switch-slider"></span>
-                                                </label>
-                                            </button>--}}
+                                        </td>
+                                        <td v-else-if="item.orden.estado_orden.estado_id===3" class="fixTd">
+                                            <a class="btn btn-secondary btn-sm m-b-0" :href="item.resource_url + '/control-estado'" role="button">
+                                                Parcial
+                                                <i class="fa fa-edit text-dark"></i>&nbsp;
+                                            </a>
                                         </td>
                                         <td v-else class="fixTd">
-                                            Entregado!
+                                            <a class="btn btn-success btn-sm m-b-0" :href="item.resource_url + '/control-estado'" role="button">
+                                                Listo
+                                                <i class="fa fa-check-circle ml-2"></i>&nbsp;
+                                            </a>
                                         </td>
-                                        <td>
-                                            <div class="row no-gutters">
+                                        <td class="fixTd">
+                                            <div class="row no-gutters" style="width:138px; align-items:center">
                                                 <div class="col-auto">
-                                                    <a class="btn btn-sm btn-spinner btn-info" :href="item.resource_url + '/edit'" title="{{ trans('brackets/admin-ui::admin.btn.edit') }}" role="button"><i class="fa fa-edit"></i>Asignar fecha</a>
+                                                    <a class="btn btn-sm btn-spinner btn-info mb-0" :href="item.resource_url + '/edit'" title="{{ trans('brackets/admin-ui::admin.btn.edit') }}" role="button"><i class="fa fa-edit"></i>Asignar fecha</a>
                                                 </div>
                                                 <form class="col" @submit.prevent="deleteItem(item.resource_url)">
                                                     <button type="submit" class="btn btn-sm btn-danger" title="{{ trans('brackets/admin-ui::admin.btn.delete') }}"><i class="fa fa-trash-o"></i></button>
@@ -169,5 +172,6 @@
             </div>
         </div>
     </turno-listing>
-
 @endsection
+
+

@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\TurnoController;
 use App\Http\Controllers\CalendarController;
+use App\Http\Controllers\CambioEstadoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -134,7 +136,9 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
             Route::post('/{turno}',                                     'TurnoController@update')->name('update');
             Route::delete('/{turno}',                                   'TurnoController@destroy')->name('destroy');
             Route::get('/export',                                       'TurnoController@exportTurno')->name('export');
-            Route::get('/{turno}/listo',                                'TurnoController@turnoListo');
+            Route::get('/{turno}/control-estado',                       'TurnoController@controlEstado');
+            Route::get('/cambio-estado',                               'TurnoController@cambioEstado');
         });
     });
 });
+Route::post('/cambio-estado', [CambioEstadoController::class, 'cambioEstado']);
