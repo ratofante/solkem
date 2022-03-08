@@ -101,7 +101,7 @@
                                         @endcan
 
 
-                                        <td>@{{ item.fechaHora | datetime }}</td>
+                                        <td>@{{ item.fechaHora }}</td>
                                         <td>@{{ item.orden.nroOrden }}</td>
 
                                         <td v-if="item.paraEntrega=='1'">Para entrega</td>
@@ -114,7 +114,7 @@
                                         @endcannot
 
                                         <td v-if="item.paraEntrega=='1'" class="fixTd">@{{ item.orden.cliente.direccion }}</td>
-                                        <td v-else class="fixTd">@{{ item.sucursal.nombre }}</td>
+                                        <td v-else class="fixTd">@{{ item.sucursal.nombre }} - @{{ item.orden.estado_orden.id }}</td>
 
 
                                         @can('admin.turno.create')

@@ -11,7 +11,11 @@ class CambioEstadoController extends Controller
 {
      public function cambioEstado(Request $request)
     {
-        var_dump($request->input('detalles'));
+
+        dd(EstadoOrden::where('actual', '=', 0)->get());
+
+
+        /*var_dump($request->input('detalles'));
         echo "<br>";
         var_dump($request->input('orden_id'));
         echo "<br>";
@@ -39,15 +43,19 @@ class CambioEstadoController extends Controller
                 break;
         }
 
+        //1era opción, buscar la row con orden_id y actual = 1
+
+
         EstadoOrden::create([
             'usuario_id' => $request->input('usuario_id'),
             'orden_id' => $request->input('orden_id'),
-            'estado_id' => $estado
+            'estado_id' => $estado,
+            'actual' => 1
         ]);
 
         var_dump($estado);
         echo "<br>";
-
+        */
         //return redirect('/admin/turnos');
     }
 }

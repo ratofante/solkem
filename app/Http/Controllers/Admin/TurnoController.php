@@ -83,13 +83,12 @@ class TurnoController extends Controller
                 $query->with(['sucursal']);
                 $query->join('sucursal', 'turno.sucursal_id', "=", 'sucursal.id');
 
-                $query->with('orden.cliente');
+                $query->with(['orden.cliente']);
                 $query->join('cliente', 'orden.cliente_id', '=', 'cliente.id');
 
-                $query->with('orden.estado_orden');
-                $query->join('estado_orden', 'orden.id', '=','estado_orden.orden_id')->orderBy('estado_orden.created_at', 'desc')->latest('estado_orden.created_at');
-
-
+                $query->with(['orden.estado_orden']);
+                $query->join('estado_orden', 'orden.id', '=','estado_orden.orden_id');
+                $query->whereIn('estado_orden.actual',[1]);
             },
         );
         //var_dump($data);die;
@@ -101,7 +100,7 @@ class TurnoController extends Controller
             }
             return ['data' => $data];
         }
-        //dd($Data);
+        //dd($data);
         return view('admin.turno.index', ['data' => $data]);
         }
     }

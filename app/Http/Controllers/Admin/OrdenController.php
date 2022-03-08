@@ -38,10 +38,10 @@ class OrdenController extends Controller
             $request,
 
             // set columns to query
-            ['id', 'nroOrden', 'cliente_id', 'detalles'],
+            ['id', 'nroOrden', 'cliente_id', 'detalles', 'estado_orden.actual'],
 
             // set columns to searchIn
-            ['id', 'nroOrden', 'detalles', 'cliente_id'],
+            ['id', 'nroOrden', 'detalles', 'cliente_id', 'estado_orden.actual'],
 
             function($query) {
                 $query->with(['cliente']);
@@ -51,8 +51,8 @@ class OrdenController extends Controller
                 $query->join('turno', 'orden.id','=','turno.orden_id');
 
                 $query->with(['estado_orden']);
-                $query->join('estado_orden', 'orden.id', '=', 'estado_orden.orden_id');
-                $query->join('estado', 'estado_orden.estado_id','=','estado.id');
+                $query->join('estado_orden', 'orden.id', '=', 'estado_orden.orden_id')->where('estado_orden.actual','=',1);
+                //$query->join('estado', 'estado_orden.estado_id','=','estado.id');
                 //$query->where('estado_orden.estado_id', '=', 'estado.id');
 
             }
