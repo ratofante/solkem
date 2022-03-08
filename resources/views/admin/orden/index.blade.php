@@ -3,6 +3,9 @@
 @section('title', trans('admin.orden.actions.index'))
 
 @section('body')
+    @php
+        //var_dump($data);
+    @endphp
     <orden-listing
         :data="{{ $data->toJson() }}"
         :url="'{{ url('admin/ordens') }}'"
@@ -85,10 +88,8 @@
                                         <td v-if="item.turno.fechaHora==null">Sin asignar</td>
                                         <td v-else>@{{ item.turno.fechaHora | datetime}}</td>
 
+                                        <td>@{{ item.estado_orden.estado_id }}</td>
 
-                                        <td v-if="item.estado_orden.estado_id=='1'">No ha sido entregado</td>
-                                        <td v-else-if="item.estado_orden.estado_id=='3'">Entrega parcial</td>
-                                        <td v-else>Entregado</td>
 
 
                                         <td>

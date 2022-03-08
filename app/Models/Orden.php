@@ -41,7 +41,11 @@ class Orden extends Model
     }
     public function estado_orden()
     {
-        return $this->hasOne(EstadoOrden::class, 'orden_id');
+        return $this->hasMany(EstadoOrden::class, 'orden_id');
+    }
+    public function ultimoEstado()
+    {
+        return $this->hasOne(EstadoOrden::class)->orderBy('created_at', 'DESC');
     }
     public function turno()
     {

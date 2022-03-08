@@ -45,16 +45,22 @@ class OrdenController extends Controller
 
             function($query) {
                 $query->with(['cliente']);
-                $query->join('cliente', 'cliente.id', '=', 'orden.cliente_id');
+                //$query->join('cliente', 'cliente.id', '=', 'orden.cliente_id');
 
                 $query->with(['turno']);
-                $query->join('turno', 'orden.id','=','turno.orden_id');
+                //$query->join('turno', 'orden.id','=','turno.orden_id');
 
-                $query->with(['estado_orden']);
-                $query->join('estado_orden', 'orden.id', '=', 'estado_orden.orden_id');
-                $query->join('estado', 'estado_orden.estado_id','=','estado.id');
-                //$query->where('estado_orden.estado_id', '=', 'estado.id');
+                $query->with(['estado_orden' => function($q){
+                    return $q->orderBy('created_at', 'desc')->limit(1);
+                }]);
+                $query->join('estado_orden','estado_orden.orden_id','=','orden.id')->orderBy('estado_orden.created_at', 'desc')->limit(1);
+                //$query->with('ultimoEstado');
+                //$query->leftJoin('estado_orden', 'orden.id', '=', 'estado_orden.orden_id');
+                //$query->join('estado_orden', 'orden.id','=','estado_orden.orden_id');
+                //$query->join('estado', 'estado_orden.estado_id', '=', 'estado.id');
 
+                //$query->join('estado_orden', 'orden.id', '=', 'estado_orden.orden_id');
+                //$query->join('estado', 'estado_orden.estado_id','=','estado.id');
             }
         );
 
@@ -66,8 +72,9 @@ class OrdenController extends Controller
             }
             return ['data' => $data];
         }
+        //dd($data);
         //var_dump($data);die;
-        return view('admin.orden.index', ['data' => $data]);
+        return view('admin.orden.index', ['data' => $data, 'blade' => $data]);
     }
 
     /**

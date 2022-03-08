@@ -87,7 +87,7 @@ class TurnoController extends Controller
                 $query->join('cliente', 'orden.cliente_id', '=', 'cliente.id');
 
                 $query->with('orden.estado_orden');
-                $query->join('estado_orden', 'orden.id', '=','estado_orden.orden_id')->orderBy('estado_orden.created_at', 'desc')->latest('estado_orden.created_at');
+                $query->rightJoin('estado_orden', 'orden.id', '=','estado_orden.orden_id')->orderBy('estado_orden.created_at', 'desc')->latest('estado_orden.created_at');
 
 
             },
@@ -101,7 +101,7 @@ class TurnoController extends Controller
             }
             return ['data' => $data];
         }
-        //dd($Data);
+        //dd($data);
         return view('admin.turno.index', ['data' => $data]);
         }
     }
