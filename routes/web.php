@@ -3,6 +3,8 @@
 use App\Http\Controllers\Admin\TurnoController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\CambioEstadoController;
+use App\Mail\NuevoUsuario;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -142,3 +144,8 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
     });
 });
 Route::post('/cambio-estado', [CambioEstadoController::class, 'cambioEstado']);
+Route::get('/mail-bienvenida', function() {
+    // En controlador!
+    //Mail::to('gwilkens.r@gmail.com')->send(new NuevoUsuario());
+    return new NuevoUsuario();
+});
