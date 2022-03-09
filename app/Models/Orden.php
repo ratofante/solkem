@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Events\NuevaOrden;
-use App\Listeners\GenerarTurno;
 use Illuminate\Database\Eloquent\Model;
 
 class Orden extends Model
@@ -24,7 +23,6 @@ class Orden extends Model
     protected $dates = [
         'created_at',
         'updated_at',
-
     ];
 
     protected $appends = ['resource_url'];

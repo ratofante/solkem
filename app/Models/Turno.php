@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\TurnoUpdate;
 use Illuminate\Database\Eloquent\Model;
 
 class Turno extends Model
@@ -13,13 +14,14 @@ class Turno extends Model
         'paraEntrega',
         'orden_id',
         'sucursal_id',
-
     ];
 
+    protected $dispatchesEvents = [
+        'updated' => TurnoUpdate::class,
+    ];
 
     protected $dates = [
         'fechaHora',
-
     ];
     public $timestamps = false;
 

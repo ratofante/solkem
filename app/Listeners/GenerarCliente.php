@@ -3,10 +3,12 @@
 namespace App\Listeners;
 
 use App\Events\NuevoUsuario;
+use App\Mail\NuevoUsuario as MailNuevoUsuario;
 use App\Models\Cliente;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class GenerarCliente
 {
@@ -28,8 +30,8 @@ class GenerarCliente
      */
     public function handle(NuevoUsuario $event)
     {
-        //Chequeamos si el rol es 2 "empresa".
-        $rol = DB::table('model_has_roles')->select('role_id')->where("model_id","=","2")->get();
+        $clienteEmail = $event->usuario->email;
+        Mail::to($clienteEmail)->send(new MailNuevoUsuario($event));
 
         Cliente::create([
             'cuit' => 'incompleto',
@@ -38,9 +40,5 @@ class GenerarCliente
             'direccion' => 'incompleto',
             'usuario_id' => $event->usuario->id
         ]);
-
-        /*if($rol[0]->role_id === 2){
-
-        }*/
     }
 }

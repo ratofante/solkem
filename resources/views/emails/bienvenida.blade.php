@@ -1,10 +1,11 @@
 @component('mail::message')
 # Tu usuario ha sido generado con éxito
 
-Ya puedes ingresar a nuestro sitio y chequear los horarios de envío de tus pedidos.
+Bienvenido {{ $usuario->first_name }}. Ya puedes ingresar a nuestro sitio y chequear los horarios de envío de tus pedidos.
+
 
 @component('mail::button', ['url' => '/admin/turnos'])
-Button Text
+Ver Turnos
 @endcomponent
 
 Gracias por preferirnos,<br>

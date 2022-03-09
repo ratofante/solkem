@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\TurnoUpdate;
 use App\Exports\TurnoExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Turno\BulkDestroyTurno;
@@ -233,29 +234,15 @@ class TurnoController extends Controller
         return response(['message' => trans('brackets/admin-ui::admin.operation.succeeded')]);
     }
 
-    /**
-     * Export entities
-     *
-     * @return BinaryFileResponse|null
-     */
-    /*public function export(): ?BinaryFileResponse
-    {
-        return Excel::download(app(TurnoExport::class), 'turnos.xlsx');
-    }*/
+    /* EXPORT MEHTOD */
     public function exportTurno()
     {
         return Excel::download(new TurnoExport, 'turnos.xlsx');
     }
 
+    /* Redirección para cambiar el estado_orden */
     public function controlEstado(Turno $turno)
     {
-        /*
-        $turno->orden_id
-        $turno->sucursal_id
-        $turno->fechaHora
-        $turno->paraEntrega
-        */
-
         $query = Turno::join('sucursal', 'turno.sucursal_id','=','sucursal.id')
                 ->join('orden', 'turno.orden_id','=','orden.id')
                 ->join('cliente', 'orden.cliente_id', '=', 'cliente.id')
@@ -263,15 +250,11 @@ class TurnoController extends Controller
                 ->select('estado_orden.usuario_id', 'estado_orden.orden_id', 'estado_orden.id', 'orden.created_at','sucursal.nombre', 'estado_orden.estado_id', 'estado_orden.updated_at','orden.nroOrden', 'orden.detalles', 'cliente.razon_social', 'turno.paraEntrega', 'turno.fechaHora')
                 ->where('turno.id', '=', $turno->id)
                 ->get()->toArray();
-
         //var_dump($query[0]);
         return view('control-estado.index', [
             'data' => $query[0]
         ]);
-        //$orden_id = $turno->orden_id;
-        //EstadoOrden::where('orden_id', $orden_id)->update(['estado_id' => 2]);
 
-        //return redirect()->back();
 
     }
 }

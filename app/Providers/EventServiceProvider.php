@@ -5,11 +5,13 @@ namespace App\Providers;
 use App\Events\DeleteUser;
 use App\Events\NuevaOrden;
 use App\Events\NuevoUsuario;
+use App\Events\TurnoUpdate;
 use App\Listeners\AsignarRoles;
 use App\Listeners\DeleteClient;
 use App\Listeners\GenerarCliente;
 use App\Listeners\GenerarEstadoOrden;
 use App\Listeners\GenerarTurno;
+use App\Listeners\MailNuevoTurno;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -36,6 +38,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         DeleteUser::class => [
             DeleteClient::class,
+        ],
+        TurnoUpdate::class => [
+            MailNuevoTurno::class,
         ]
     ];
 

@@ -103,6 +103,7 @@ class AdminUsersController extends Controller
      */
     public function store(StoreAdminUser $request)
     {
+
         // Sanitize input
         $sanitized = $request->getModifiedData();
 
@@ -113,6 +114,7 @@ class AdminUsersController extends Controller
         $adminUser->roles()->sync(collect($request->input('roles', []))->map->id->toArray());
 
         if ($request->ajax()) {
+
             return ['redirect' => url('admin/admin-users'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
         }
 

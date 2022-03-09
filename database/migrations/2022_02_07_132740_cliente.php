@@ -17,7 +17,7 @@ class Cliente extends Migration
         Schema::create('cliente', function(Blueprint $table) {
             $table->increments('id'); // si se llama de otra manera se tilda la query Select en la view (show() asumo..)
             $table->string('cuit', 15); // ¿cómo agregar validación?
-            $table->string('razon_social', 30);
+            $table->string('razon_social', 100);
             $table->string('telefono', 45);
             $table->string('direccion', 45);
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));

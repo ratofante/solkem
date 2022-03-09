@@ -144,8 +144,9 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
     });
 });
 Route::post('/cambio-estado', [CambioEstadoController::class, 'cambioEstado']);
-Route::get('/mail-bienvenida', function() {
-    // En controlador!
-    //Mail::to('gwilkens.r@gmail.com')->send(new NuevoUsuario());
-    return new NuevoUsuario();
+
+Route::get('/test', function(){
+    return view('test', [
+        'data' => json_decode('{"first_name":"Cliente Test Uno","last_name":"Apellido Test Uno","email":"clientetest@uno.com","password":"clientetest1","activated":false,"forbidden":false,"language":"en","password_confirmation":"clientetest1","roles":[{"id":2,"name":"Empresa","guard_name":"admin","created_at":null,"updated_at":null}],"wysiwygMedia":[]}')
+    ]);
 });
