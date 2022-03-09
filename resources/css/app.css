@@ -10,3 +10,7 @@
 ::-ms-input-placeholder { /* Microsoft Edge */
   color: rgb(0, 4, 255) !important;
 }
+
+.table th, .table td {
+    padding: 0.5rem !important;
+}

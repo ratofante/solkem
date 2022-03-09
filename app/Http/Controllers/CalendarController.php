@@ -48,6 +48,7 @@ class CalendarController extends Controller
             ->join('sucursal', 'turno.sucursal_id','=','sucursal.id')
             ->join('orden','turno.orden_id','=','orden.id')
             ->join('cliente','orden.cliente_id','=','cliente.id')
+            ->where('turno.fechaHora', '!=', null)
             ->get();
 
 

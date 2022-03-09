@@ -55,12 +55,19 @@ class TurnoController extends Controller
                     $query->with(['orden']);
                     $query->join('orden', 'turno.orden_id',"=",'orden.id');
 
+                    $query->with(['orden.estado_orden']);
+                    $query->join('estado_orden','orden.id','=','estado_orden.orden_id');
+
+                    $query->with(['orden.cliente']);
                     $query->join('cliente','orden.cliente_id','=','cliente.id');
+
+                    $query->with(['orden.cliente.admin_users']);
                     $query->join('admin_users','cliente.usuario_id','=','admin_users.id');
 
                     $query->where('admin_users.id',auth()->user()->id);
                 }
             );
+            //dd($data);
             return view('admin.turno.index', ['data' => $data]);
         }
         else

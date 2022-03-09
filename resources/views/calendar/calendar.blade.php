@@ -56,8 +56,13 @@
                 selectable: true,
                 nowIndicator: true,
                 dayMaxEvents: true, // allow "more" link when too many events
+                dayMaxEventRows: true,
                 events: events,
+                eventDisplay: 'block',
                 displayEventTime: false,
+                eventAfterRender: function(event, element, view){
+                    $(element).css('width','90px');
+                },
             });
             calendar.render();
         });

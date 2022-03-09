@@ -10,7 +10,7 @@ class EstadoOrden extends Model
     protected $table = 'estado_orden';
 
     protected $fillable = [
-        'id','usuario_id','orden_id','estado_id'
+        'id','usuario_id','orden_id','estado_id', 'actual'
     ];
 
 

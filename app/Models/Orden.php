@@ -41,7 +41,7 @@ class Orden extends Model
     }
     public function estado_orden()
     {
-        return $this->hasOne(EstadoOrden::class, 'orden_id');
+        return $this->hasOne(EstadoOrden::class, 'orden_id')->where('actual','=','1');
     }
     public function turno()
     {

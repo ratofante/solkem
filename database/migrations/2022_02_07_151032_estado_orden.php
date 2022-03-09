@@ -19,6 +19,7 @@ class EstadoOrden extends Migration
             $table->unsignedInteger('usuario_id')->nullable();
             $table->unsignedInteger('orden_id');
             $table->unsignedInteger('estado_id');
+            $table->tinyInteger('actual');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
 

@@ -51,10 +51,8 @@ class OrdenController extends Controller
                 $query->join('turno', 'orden.id','=','turno.orden_id');
 
                 $query->with(['estado_orden']);
-                $query->join('estado_orden', 'orden.id', '=', 'estado_orden.orden_id')->where('estado_orden.actual','=',1);
-                //$query->join('estado', 'estado_orden.estado_id','=','estado.id');
-                //$query->where('estado_orden.estado_id', '=', 'estado.id');
-
+                $query->join('estado_orden', 'orden.id', '=', 'estado_orden.orden_id');
+                $query->whereIn('estado_orden.actual',[1]);
             }
         );
 
