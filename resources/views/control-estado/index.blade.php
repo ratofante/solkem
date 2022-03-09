@@ -62,6 +62,7 @@
 
     <form id="estado-form" action="/cambio-estado" method="POST">
         @csrf
+        <input type="text" name="id" value="{{ $data['id'] }}" hidden> {{ $data['id'] }}
         <input type="text" name="orden_id" value="{{ $data['orden_id'] }}" hidden>
         <input type="text" name="usuario_id" value="{{ $data['usuario_id'] }}" hidden>
         <div class="mb-3 row">

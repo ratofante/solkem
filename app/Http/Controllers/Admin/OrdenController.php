@@ -38,29 +38,21 @@ class OrdenController extends Controller
             $request,
 
             // set columns to query
-            ['id', 'nroOrden', 'cliente_id', 'detalles'],
+            ['id', 'nroOrden', 'cliente_id', 'detalles', 'estado_orden.actual'],
 
             // set columns to searchIn
-            ['id', 'nroOrden', 'detalles', 'cliente_id'],
+            ['id', 'nroOrden', 'detalles', 'cliente_id', 'estado_orden.actual'],
 
             function($query) {
                 $query->with(['cliente']);
                 //$query->join('cliente', 'cliente.id', '=', 'orden.cliente_id');
 
                 $query->with(['turno']);
-                //$query->join('turno', 'orden.id','=','turno.orden_id');
+                $query->join('turno', 'orden.id','=','turno.orden_id');
 
-                $query->with(['estado_orden' => function($q){
-                    return $q->orderBy('created_at', 'desc')->limit(1);
-                }]);
-                $query->join('estado_orden','estado_orden.orden_id','=','orden.id')->orderBy('estado_orden.created_at', 'desc')->limit(1);
-                //$query->with('ultimoEstado');
-                //$query->leftJoin('estado_orden', 'orden.id', '=', 'estado_orden.orden_id');
-                //$query->join('estado_orden', 'orden.id','=','estado_orden.orden_id');
-                //$query->join('estado', 'estado_orden.estado_id', '=', 'estado.id');
-
-                //$query->join('estado_orden', 'orden.id', '=', 'estado_orden.orden_id');
-                //$query->join('estado', 'estado_orden.estado_id','=','estado.id');
+                $query->with(['estado_orden']);
+                $query->join('estado_orden', 'orden.id', '=', 'estado_orden.orden_id');
+                $query->whereIn('estado_orden.actual',[1]);
             }
         );
 

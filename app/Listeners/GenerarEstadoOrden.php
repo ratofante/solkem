@@ -33,6 +33,7 @@ class GenerarEstadoOrden
             'usuario_id' => $usuario_id[0]->usuario_id,
             'orden_id' => $event->orden->id,
             'estado_id' => 1,
+            'actual' => 1
         ]);
     }
 }

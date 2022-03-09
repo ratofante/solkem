@@ -16,10 +16,9 @@ class TurnoExport implements FromCollection, WithHeadings//, WithMapping, WithHe
      */
     public function collection()
     {
-        //return Turno::all();
-        //return Turno::with(['sucursal', 'orden', 'orden.cliente'])->get();
+        // fechaIngreso, n° Orden, , Detalle, ultimoEstado
 
-        $results = DB::select(DB::raw("SELECT orden.nroOrden, orden.detalles, turno.fechaHora FROM turno INNER JOIN orden ON turno.orden_id = orden.id;"));
+        $results = DB::select(DB::raw("SELECT orden.created_at, orden.nroOrden, orden.detalles, estado.estado, turno.fechaHora FROM turno INNER JOIN orden ON turno.orden_id = orden.id INNER JOIN estado_orden ON orden.id = estado_orden.orden_id INNER JOIN estado ON estado_orden.estado_id = estado.id WHERE estado_orden.actual = 1;"));
 
         return collect($results);
     }
@@ -29,17 +28,12 @@ class TurnoExport implements FromCollection, WithHeadings//, WithMapping, WithHe
     public function headings(): array
     {
         return [
+            'Fecha de Ingreso',
             'N° de Orden',
             'Detalles',
+            'Estado Actual',
             'Fecha de Entrega'
         ];
-        /*return [
-            trans('admin.turno.columns.id'),
-            trans('admin.turno.columns.fechaHora'),
-            trans('admin.turno.columns.paraEntrega'),
-            trans('admin.turno.columns.orden_id'),
-            trans('admin.turno.columns.sucursal_id'),
-        ];*/
     }
 
     /**

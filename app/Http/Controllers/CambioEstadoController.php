@@ -39,15 +39,19 @@ class CambioEstadoController extends Controller
                 break;
         }
 
+        $actual = 1;
+        EstadoOrden::where('id', $request->input('id'))
+                    ->update([
+                        'actual' => 0
+                    ]);
+
         EstadoOrden::create([
             'usuario_id' => $request->input('usuario_id'),
             'orden_id' => $request->input('orden_id'),
-            'estado_id' => $estado
+            'estado_id' => $estado,
+            'actual' => $actual
         ]);
 
-        var_dump($estado);
-        echo "<br>";
-
-        //return redirect('/admin/turnos');
+        return redirect('/admin/turnos');
     }
 }

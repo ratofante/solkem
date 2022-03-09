@@ -15,13 +15,14 @@
                     <div class="card-header">
                         <i class="fa fa-align-justify"></i> {{ trans('admin.turno.actions.index') }}
 
+                        @can('admin.turno.create')
                         <a class="btn btn-primary btn-sm pull-right m-b-0 ml-2" href="{{ url('admin/turnos/export') }}" role="button"><i class="fa fa-file-excel-o"></i>&nbsp; {{ trans('admin.turno.actions.export') }}</a>
-
 
                         <a class="btn btn-primary btn-sm pull-right m-b-0 mr-2" href="/calendar" role="button">
                             <i class="fa fa-calendar"></i> &nbsp;
                             Calendario
                         </a>
+                        @endcan
 
                     </div>
                     <div class="card-body" v-cloak>
@@ -101,7 +102,7 @@
                                         @endcan
 
 
-                                        <td>@{{ item.fechaHora | datetime }}</td>
+                                        <td>@{{ item.fechaHora }}</td>
                                         <td>@{{ item.orden.nroOrden }}</td>
 
                                         <td v-if="item.paraEntrega=='1'">Para entrega</td>
@@ -119,13 +120,13 @@
 
                                         @can('admin.turno.create')
                                         <td v-if="item.orden.estado_orden.estado_id===1" class="fixTd">
-                                            <a class="btn btn-warning btn-sm m-b-0" style="width:90px" :href="item.resource_url + '/control-estado'" role="button">
-                                                Incompleto @{{ item.orden.estado_orden.estado_id }}
+                                            <a class="btn btn-warning btn-sm m-b-0" style="width:95px" :href="item.resource_url + '/control-estado'" role="button">
+                                                Incompleto
                                                 <i class="fa fa-edit"></i>&nbsp;
                                             </a>
                                         </td>
                                         <td v-else-if="item.orden.estado_orden.estado_id===3" class="fixTd">
-                                            <a class="btn btn-secondary btn-sm m-b-0" :href="item.resource_url + '/control-estado'" role="button">
+                                            <a class="btn btn-secondary btn-sm m-b-0 text-dark" :href="item.resource_url + '/control-estado'" role="button">
                                                 Parcial
                                                 <i class="fa fa-edit text-dark"></i>&nbsp;
                                             </a>
@@ -142,7 +143,7 @@
                                                     <a class="btn btn-sm btn-spinner btn-info mb-0" :href="item.resource_url + '/edit'" title="{{ trans('brackets/admin-ui::admin.btn.edit') }}" role="button"><i class="fa fa-edit"></i>Asignar fecha</a>
                                                 </div>
                                                 <form class="col" @submit.prevent="deleteItem(item.resource_url)">
-                                                    <button type="submit" class="btn btn-sm btn-danger" title="{{ trans('brackets/admin-ui::admin.btn.delete') }}"><i class="fa fa-trash-o"></i></button>
+                                                    <button type="submit" class="btn btn-sm btn-danger" style="margin-bottom: 0px;" title="{{ trans('brackets/admin-ui::admin.btn.delete') }}"><i class="fa fa-trash-o"></i></button>
                                                 </form>
                                             </div>
                                         </td>

@@ -55,12 +55,19 @@ class TurnoController extends Controller
                     $query->with(['orden']);
                     $query->join('orden', 'turno.orden_id',"=",'orden.id');
 
+                    $query->with(['orden.estado_orden']);
+                    $query->join('estado_orden','orden.id','=','estado_orden.orden_id');
+
+                    $query->with(['orden.cliente']);
                     $query->join('cliente','orden.cliente_id','=','cliente.id');
+
+                    $query->with(['orden.cliente.admin_users']);
                     $query->join('admin_users','cliente.usuario_id','=','admin_users.id');
 
                     $query->where('admin_users.id',auth()->user()->id);
                 }
             );
+            //dd($data);
             return view('admin.turno.index', ['data' => $data]);
         }
         else
@@ -83,13 +90,12 @@ class TurnoController extends Controller
                 $query->with(['sucursal']);
                 $query->join('sucursal', 'turno.sucursal_id', "=", 'sucursal.id');
 
-                $query->with('orden.cliente');
+                $query->with(['orden.cliente']);
                 $query->join('cliente', 'orden.cliente_id', '=', 'cliente.id');
 
-                $query->with('orden.estado_orden');
-                $query->rightJoin('estado_orden', 'orden.id', '=','estado_orden.orden_id')->orderBy('estado_orden.created_at', 'desc')->latest('estado_orden.created_at');
-
-
+                $query->with(['orden.estado_orden']);
+                $query->join('estado_orden', 'orden.id', '=','estado_orden.orden_id');
+                $query->whereIn('estado_orden.actual',[1]);
             },
         );
         //var_dump($data);die;
