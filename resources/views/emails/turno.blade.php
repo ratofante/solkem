@@ -1,16 +1,12 @@
 @component('mail::message')
-# Introduction
+# Confirmación de turno para @if ($turno->paraEntrega) envío @else retiro @endif
 
-The body of your message.
-<p>{{ $turno->orden_id }}</p>
-<p>{{ $turno->fechaHora }}</p>
+La fecha designada es: {{ $turno->fechaHora }}
 
-
-
-@component('mail::button', ['url' => ''])
-Button Text
+@component('mail::button', ['url' => '/admin/turnos'])
+Ver turno
 @endcomponent
 
-Thanks,<br>
+Gracias, <br>
 {{ config('app.name') }}
 @endcomponent

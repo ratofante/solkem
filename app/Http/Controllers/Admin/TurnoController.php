@@ -247,7 +247,7 @@ class TurnoController extends Controller
                 ->join('orden', 'turno.orden_id','=','orden.id')
                 ->join('cliente', 'orden.cliente_id', '=', 'cliente.id')
                 ->join('estado_orden', 'orden.id', '=', 'estado_orden.orden_id')
-                ->select('estado_orden.usuario_id', 'estado_orden.orden_id', 'estado_orden.id', 'orden.created_at','sucursal.nombre', 'estado_orden.estado_id', 'estado_orden.updated_at','orden.nroOrden', 'orden.detalles', 'cliente.razon_social', 'turno.paraEntrega', 'turno.fechaHora')
+                ->select('estado_orden.usuario_id', 'estado_orden.orden_id', 'estado_orden.id', 'orden.created_at','sucursal.nombre', 'estado_orden.estado_id', 'estado_orden.updated_at','orden.nroOrden', 'orden.detalles', 'cliente.razon_social', 'cliente.direccion', 'turno.paraEntrega', 'turno.fechaHora')
                 ->where('turno.id', '=', $turno->id)
                 ->get()->toArray();
         //var_dump($query[0]);

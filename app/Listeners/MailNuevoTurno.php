@@ -29,8 +29,6 @@ class MailNuevoTurno
      */
     public function handle(TurnoUpdate $event)
     {
-
-
         $orden_id = $event->turno->orden_id;
         $email = AdminUser::select('email')
                     ->join('cliente', 'admin_users.id', '=', 'cliente.usuario_id')

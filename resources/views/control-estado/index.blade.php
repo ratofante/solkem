@@ -43,18 +43,19 @@
                         Entrega parcial. Fecha: {{ $data['updated_at'] }}
                     @endif
                 </li>
-                <li class="list-group-item mb-3">
+                <li class="list-group-item">
                     @if ($data['paraEntrega'] !== null)
-                        Envío a dirección
+                        Envío a: {{ $data['direccion'] }}
                     @else
-                        Retiro en Sucursal - {{ $data['nombre'] }}
+                        Retiro en: {{ $data['nombre'] }}
                     @endif
-
-                    {{ $data['paraEntrega'] }} - @if ($data['fechaHora'] !== null)
-                        {{ $data['fechaHora'] }}
+                </li>
+                <li class="list-group-item mb-3">
+                    @if ($data['fechaHora'] !== null)
+                        Fecha del turno: {{ $data['fechaHora'] }}
                     @else
                         Turno no asignado
-                    @endif{{ $data['fechaHora'] }}
+                    @endif
                 </li>
             </ul>
         </div>
@@ -62,7 +63,7 @@
 
     <form id="estado-form" action="/cambio-estado" method="POST">
         @csrf
-        <input type="text" name="id" value="{{ $data['id'] }}" hidden> {{ $data['id'] }}
+        <input type="text" name="id" value="{{ $data['id'] }}" hidden>
         <input type="text" name="orden_id" value="{{ $data['orden_id'] }}" hidden>
         <input type="text" name="usuario_id" value="{{ $data['usuario_id'] }}" hidden>
         <div class="mb-3 row">

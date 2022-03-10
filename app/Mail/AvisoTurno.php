@@ -25,10 +25,6 @@ class AvisoTurno extends Mailable
     public function __construct(TurnoUpdate $event)
     {
         $this->turno = $event->turno;
-        /*$this->email = AdminUser::select('email')
-                    ->join('cliente', 'admin_user.id', '=', 'cliente.usuario.id')
-                    ->join('orden', 'cliente.id', '=', 'orden.cliente_id')
-                    ->whereIn('orden.id', [$event->turno->orden_id]);*/
     }
 
     /**
