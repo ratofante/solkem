@@ -30,7 +30,7 @@
                                     </div>
                                     <div class="col-sm-auto form-group ">
                                         <select class="form-control" v-model="pagination.state.per_page">
-                                            
+
                                             <option value="10">10</option>
                                             <option value="25">25</option>
                                             <option value="100">100</option>
@@ -49,10 +49,10 @@
                                             </label>
                                         </th>
 
-                                        <th is='sortable' :column="'id'">{{ trans('admin.sucursal.columns.id') }}</th>
+
+                                        <th is='sortable' :column="'nombre'">{{ trans('admin.sucursal.columns.nombre') }}</th>
                                         <th is='sortable' :column="'apertura'">{{ trans('admin.sucursal.columns.apertura') }}</th>
                                         <th is='sortable' :column="'cierre'">{{ trans('admin.sucursal.columns.cierre') }}</th>
-                                        <th is='sortable' :column="'nombre'">{{ trans('admin.sucursal.columns.nombre') }}</th>
                                         <th is='sortable' :column="'direccion'">{{ trans('admin.sucursal.columns.direccion') }}</th>
                                         <th is='sortable' :column="'telefono'">{{ trans('admin.sucursal.columns.telefono') }}</th>
                                         <th is='sortable' :column="'email'">{{ trans('admin.sucursal.columns.email') }}</th>
@@ -79,14 +79,13 @@
                                             </label>
                                         </td>
 
-                                    <td>@{{ item.id }}</td>
+                                        <td>@{{ item.nombre }}</td>
                                         <td>@{{ item.apertura | time }}</td>
                                         <td>@{{ item.cierre | time }}</td>
-                                        <td>@{{ item.nombre }}</td>
                                         <td>@{{ item.direccion }}</td>
                                         <td>@{{ item.telefono }}</td>
                                         <td>@{{ item.email }}</td>
-                                        
+
                                         <td>
                                             <div class="row no-gutters">
                                                 <div class="col-auto">

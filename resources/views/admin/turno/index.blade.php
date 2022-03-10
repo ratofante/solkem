@@ -3,10 +3,10 @@
 @section('title', trans('admin.turno.actions.index'))
 
 @section('body')
-
     <turno-listing
         :data="{{ $data->toJson() }}"
         :url="'{{ url('admin/turnos') }}'"
+        :timezone="'America/Argentina/Buenos_Aires'"
         inline-template>
 
         <div class="row">
@@ -69,12 +69,12 @@
                                             <th>Detalle del Pedido</th>
                                         @endcannot
 
-                                        <th is='sortable' :column="'sucursal_id'">{{ trans('admin.turno.columns.sucursal_id') }}</th>
+                                        <th :column="'sucursal_id'">{{ trans('admin.turno.columns.sucursal_id') }}</th>
 
 
 
                                         @can('admin.turno.create')
-                                            <th is='sortable' >Estado del Pedido</th>
+                                            <th :column="'estado_orden.estado_id'">Estado del Pedido</th>
                                             <th></th>
                                         @endcan
                                     </tr>
@@ -102,7 +102,7 @@
                                         @endcan
 
 
-                                        <td>@{{ item.fechaHora }}</td>
+                                        <td>@{{ item.fechaHora | datetime}}</td>
                                         <td>@{{ item.orden.nroOrden }}</td>
 
                                         <td v-if="item.paraEntrega=='1'">Para entrega</td>

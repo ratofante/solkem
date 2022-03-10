@@ -86,10 +86,10 @@
                                         <td>@{{ item.detalles }}</td>
 
                                         <td v-if="item.turno.fechaHora==null">Sin asignar</td>
-                                        <td v-else>@{{ item.turno.fechaHora }}</td>
+                                        <td v-else>@{{ item.turno.fechaHora | datetime}}</td>
 
                                         <td v-if="item.estado_orden.estado_id == 1">
-                                            Incompleto@{{ item.estado_orden.estado_id }}
+                                            Incompleto
                                         </td>
                                         <td v-else-if="item.estado_orden.estado_id == 3"> Parcial</td>
                                         <td v-else>Completo</td>
