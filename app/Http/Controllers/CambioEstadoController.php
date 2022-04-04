@@ -40,7 +40,7 @@ class CambioEstadoController extends Controller
         }
 
         $actual = 1;
-        EstadoOrden::where('id', $request->input('id'))
+        EstadoOrden::where('orden_id', $request->input('orden_id'))
                     ->update([
                         'actual' => 0
                     ]);

@@ -14,3 +14,79 @@
 .table th, .table td {
     padding: 0.5rem !important;
 }
+
+
+/**************
+*   GENERAR CLIENTE
+***************/
+
+body {
+    background: rgb(28,58,109);
+    background: linear-gradient(180deg, rgba(28,58,109,1) 0%, rgba(255,255,255,1) 68%, rgba(231,83,60,1) 100%);
+    max-width: 100vw;
+    overflow-x: hidden;
+}
+#gencli-form {
+    display: flex;
+    flex-flow: column;
+}
+.form-section {
+    background-color: #1d1d39;
+    border-radius: 5px;
+    margin-bottom: 2rem;
+    width: clamp(280px, 80vw, 320px);
+}
+#estado, #detalles {
+    width: clamp(280px, 95vw,320px);
+    margin: auto;
+}
+@media (min-width: 760px) {
+    #gencli-form {
+        flex-flow: row;
+        justify-content: space-between;
+    }
+    .form-section {
+        width: clamp(320px, 95vw, 600px);
+    }
+    #estado, #detalles {
+        max-width: 400px;
+        margin-left: 1rem;
+    }
+}
+.logo-container {
+    position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+z-index: -1;
+display: grid;
+align-content: center;
+}
+.logo-container img {
+    margin:auto;
+    max-width: 338px;
+    max-height: 112px;
+}
+
+.box-custom, input, textarea {
+    background-color: #ffffff80;
+    border: 0.1rem solid rgba(0, 0, 0, 0.329);
+    box-shadow: 0px 0px 2px black;
+}
+
+.volver-btn, .volver-button a {
+    text-decoration: none;
+}
+.volver-button {
+    color: white;
+    background-color: rgb(231,83,60);
+    position: sticky;
+    left: 94vw;
+    top: 2%;
+}
+
+
+
+
+

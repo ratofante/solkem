@@ -2,6 +2,7 @@
     "/js/app.js": "/js/app.js",
     "/js/admin.js": "/js/admin.js",
     "/js/cambio-estado.js": "/js/cambio-estado.js",
+    "/js/generar-cliente.js": "/js/generar-cliente.js",
     "/css/admin.css": "/css/admin.css",
     "/css/app.css": "/css/app.css"
 }

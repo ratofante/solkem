@@ -30,7 +30,7 @@ class EventServiceProvider extends ServiceProvider
         ],
         NuevoUsuario::class => [
             GenerarCliente::class,
-            AsignarRoles::class,
+            //AsignarRoles::class,
         ],
         NuevaOrden::class => [
             GenerarTurno::class,

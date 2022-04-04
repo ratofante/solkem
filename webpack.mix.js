@@ -23,6 +23,7 @@ mix
     .vue();
 
 mix.js('resources/js/cambio-estado.js', 'public/js');
+mix.js('resources/js/generar-cliente.js', 'public/js');
 
 if (mix.inProduction()) {
     mix.version();

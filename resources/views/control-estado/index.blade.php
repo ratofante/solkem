@@ -7,28 +7,32 @@
     <title>Cambiar Estado - Solkem</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 </head>
 <body>
-<div class="w-75 m-auto">
+<div class="logo-container">
+    <img src="{{ asset('images/logo-solkem.png') }}" alt="">
+</div>
+<div class="m-auto">
     <header class="container mt-3">
-        <h2>Actualizar Estado</h2>
+        <h2 class="text-white">Actualizar Estado</h2>
     </header>
 <div class="container m-auto">
     <div class="mb-3 row">
-        <div class="card border border-primary bg-light m-3" style="width: 18rem;">
-            <div class="card-header pl-3 pt-3 pb-1">
+        <div class="card box-custom m-3 p-3" style="width: 18rem;">
+            <div class="card-header pl-3 pt-1 pb-1">
                 <h5>Información del pedido:</h5>
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"><b>n° Orden :</b> {{ $data['nroOrden'] }}</li>
                 <li class="list-group-item"><b>Detalles:</b> {{ $data['detalles'] }}</li>
-                <li class="list-group-item"><b>Social Cliente:</b> {{ $data['razon_social'] }}</li>
+                <li class="list-group-item"><b>Razon Social Cliente:</b> {{ $data['razon_social'] }}</li>
             </ul>
         </div>
-        <div class="card border border-primary bg-light m-3" style="width: 18rem;">
-            <div class="card-header pl-3 pt-3 pb-1">
+        <div class="card box-custom m-3 p-3" style="width: 18rem;">
+            <div class="card-header pl-3 pt-1 pb-1">
                 <h5>Fecha y Estado:</h5>
             </div>
             <ul class="list-group list-group-flush">
@@ -68,19 +72,18 @@
         <input type="text" name="usuario_id" value="{{ $data['usuario_id'] }}" hidden>
         <div class="mb-3 row">
             <label for="detalles" class="col-sm-1-12 col-form-label text-dark mr-3">Modificar Detalles :</label>
-            <textarea type="text|password|email|number|submit|date|datetime|datetime-local|month|color|range|search|tel|time|url|week" class="form-control text-dark" style="max-width:400px" name="detalles" id="detalles" placeholder="{{ $data['detalles'] }}"></textarea>
+            <textarea type="text|password|email|number|submit|date|datetime|datetime-local|month|color|range|search|tel|time|url|week" class="form-control text-dark" name="detalles" id="detalles" placeholder="{{ $data['detalles'] }}"></textarea>
 
         </div>
         <div class="mb-3 row">
           <label for="estado" class="col-sm-1-12 col-form-label text-dark mr-3">Estado del pedido</label>
-            <select class="form-control" style="max-width:400px" name="estado" id="estado" form="estado-form">
+            <select class="form-control" name="estado" id="estado" form="estado-form">
                 <option value="incompleto">Incompleto</option>
                 <option value="parcial">Parcial</option>
                 <option value="completo">Completo</option>
             </select>
         </div>
         <div class="mb-3 row">
-
             <!-- Button trigger modal -->
             <div>
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -89,7 +92,7 @@
             </div>
             <div class="mt-3">
                 <button type="button">
-                    <a href="{{ url('/admin/turnos') }}" class="">Volver</a>
+                    <a href="{{ url('/admin/turnos') }}" class="volver-btn">Volver</a>
                 </button>
             </div>
         </div>

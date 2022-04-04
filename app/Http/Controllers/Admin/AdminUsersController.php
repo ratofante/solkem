@@ -103,7 +103,6 @@ class AdminUsersController extends Controller
      */
     public function store(StoreAdminUser $request)
     {
-
         // Sanitize input
         $sanitized = $request->getModifiedData();
 

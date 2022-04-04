@@ -14,7 +14,7 @@
                 <div class="card">
                     <div class="card-header">
                         <i class="fa fa-align-justify"></i> {{ trans('admin.cliente.actions.index') }}
-
+                        <a class="btn btn-primary btn-spinner btn-sm pull-right m-b-0" href="/admin/clientes/generar-cliente" role="button"><i class="fa fa-plus"></i>&nbsp; Nuevo Cliente</a>
                     </div>
                     <div class="card-body" v-cloak>
                         <div class="card-block">

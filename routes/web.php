@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\TurnoController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\CambioEstadoController;
+use App\Http\Controllers\GenerarClienteController;
 use App\Mail\NuevoUsuario;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
@@ -143,7 +144,10 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
         });
     });
 });
+
 Route::post('/cambio-estado', [CambioEstadoController::class, 'cambioEstado']);
+Route::get('/admin/clientes/generar-cliente', [GenerarClienteController::class, 'index']);
+Route::post('/generar-cliente', [GenerarClienteController::class, 'store']);
 
 Route::get('/test', function(){
     return view('test', [

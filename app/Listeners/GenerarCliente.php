@@ -33,12 +33,12 @@ class GenerarCliente
         $clienteEmail = $event->usuario->email;
         Mail::to($clienteEmail)->send(new MailNuevoUsuario($event));
 
-        Cliente::create([
+        /*Cliente::create([
             'cuit' => 'falta completar',
             'razon_social' => $event->usuario->first_name." ".$event->usuario->last_name,
             'telefono' => 'falta completar',
             'direccion' => 'falta completar',
             'usuario_id' => $event->usuario->id
-        ]);
+        ]);*/
     }
 }
