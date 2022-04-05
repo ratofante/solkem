@@ -22,6 +22,15 @@
     <div class="mx-3 p-3">
         <h3 class="text-white">Generar nuevo cliente / usuario</h3>
     </div>
+    @if($errors->any())
+    <div class="error-display">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
 </header>
 <div class="form-wrapper">
     <form id="gencli-form"
