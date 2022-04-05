@@ -56,8 +56,10 @@ class GenerarClienteController extends Controller
 
         DB::table('model_has_permissions')->insert($permisos);
 
-        return view('generar-cliente.index', [
-            'data' => $data,
-        ]);
+        return view('admin.cliente.index');
+
+        // return view('generar-cliente.index', [
+        //     'data' => $data,
+        // ]);
     }
 }

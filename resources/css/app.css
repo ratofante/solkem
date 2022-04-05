@@ -79,12 +79,20 @@ align-content: center;
 .volver-btn, .volver-button a {
     text-decoration: none;
 }
+.volver-div {
+    position: absolute;
+    height: 0px;
+    right: 5px;
+    top: 5px;
+}
 .volver-button {
     color: white;
     background-color: rgb(231,83,60);
-    position: sticky;
-    left: 94vw;
-    top: 2%;
+    transition: color 200ms ease-in-out, background-color 250ms ease-in-out;
+}
+.volver-button:hover, .volver-button:hover a {
+    background-color:#1d1d39;
+    color: rgb(231,83,60);
 }
 
 
