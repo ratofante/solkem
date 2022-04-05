@@ -55,6 +55,8 @@ body {
     #gencli-form {
         flex-flow: row;
         justify-content: space-between;
+        max-width: 1000px;
+        margin: auto;
     }
     .form-section {
         width: clamp(320px, 95vw, 600px);
@@ -103,6 +105,14 @@ align-content: center;
 .volver-button:hover, .volver-button:hover a {
     background-color:#1d1d39;
     color: rgb(231,83,60);
+}
+
+.gencli-header {
+    flex-direction: column;
+}
+.error-display ul li {
+    color: #e7533c;
+    font-weight: bold;
 }
 
 

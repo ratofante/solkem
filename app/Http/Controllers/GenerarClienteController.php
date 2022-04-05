@@ -7,6 +7,7 @@ use Brackets\AdminAuth\Models\AdminUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password;
 
 class GenerarClienteController extends Controller
 {
@@ -20,14 +21,25 @@ class GenerarClienteController extends Controller
 
     public function store (Request $request) {
 
-        $data = $request->input();
+        //Validamos los inputs. validate() devuelve un array con los nombres de los inputs.
+        $validated = $request->validate([
+            'cuit' => ['required','numeric'],
+            'razon_social' => ['required', 'max:100'],
+            'telefono' => ['required'],
+            'direccion' => ['required'],
+            'nombre' => ['required', 'alpha', 'max:50'],
+            'apellido' => ['required', 'alpha', 'max:50'],
+            'email' => ['required','email:rfc,dns'],
+            'password' => ['required', Password::min(10)->numbers()]
+        ]);
+        //Data validada, continuamos ..
 
         //Creamos usuario, guardamos ¿la respuesta?
         $usuario = AdminUser::create([
-            'first_name' => $data['nombre'],
-            'last_name' => $data['apellido'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'first_name' => $validated['nombre'],
+            'last_name' => $validated['apellido'],
+            'email' => $validated['email'],
+            'password' => Hash::make($validated['password']),
             'activated' => 1,
             'forbidden' => 0,
             'language' => 'en'
@@ -35,10 +47,10 @@ class GenerarClienteController extends Controller
 
         //Usamos la respuesta para pasar el usuario_id y crear nuevo cliente
         Cliente::create([
-            'cuit' => $data['cuit'],
-            'razon_social' => $data['razon_social'],
-            'telefono' => $data['telefono'],
-            'direccion' => $data['direccion'],
+            'cuit' => $validated['cuit'],
+            'razon_social' => $validated['razon_social'],
+            'telefono' => $validated['telefono'],
+            'direccion' => $validated['direccion'],
             'usuario_id' => $usuario->id
         ]);
 
@@ -53,13 +65,8 @@ class GenerarClienteController extends Controller
         }
 
         //¿será necesario insertar en model has roles?
-
         DB::table('model_has_permissions')->insert($permisos);
 
         return view('admin.cliente.index');
-
-        // return view('generar-cliente.index', [
-        //     'data' => $data,
-        // ]);
     }
 }
